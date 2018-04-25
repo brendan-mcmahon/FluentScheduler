@@ -1,7 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using TemporalExpressions;
-using TemporalExpressions.Rules;
 
 namespace UnitTests
 {

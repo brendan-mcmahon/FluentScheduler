@@ -1,16 +1,5 @@
 ﻿namespace TemporalExpressions
 {
-    public class DayOfTheWeek
-    {
-        public const string Sunday = "Sunday";
-        public const string Monday = "Monday";
-        public const string Tuesday = "Tuesday";
-        public const string Wednesday = "Wednesday";
-        public const string Thursday = "Thursday";
-        public const string Friday = "Friday";
-        public const string Saturday = "Saturday";
-    }
-
     //public class Months
     //{
     //    public const string January = "January";
@@ -27,19 +16,48 @@
     //    public const string December = "December";
     //}
 
-    //public static class TimeUnit
-    //{
-    //    public static string Days = "Days";
-    //    public static string Weeks = "Weeks";
-    //    public static string Months = "Months";
-    //    public static string Years = "Years";
-    //}
+    public enum Ordinals
+    {
+        First,
+        Nearest,
+        //Second,
+        //Third,
+        //Fourth,
+        //Fifth,
+        //Sixth,
+        //Seventh,
+        //Eighth,
+        //Ninth,
+        //Tenth,
+        //Eleventh,
+        //Twelfth,
+        //Thirteenth,
+        //Fourteenth,
+        //Fifteenth,
+        //Sixteenth,
+        //Seventeenth,
+        //Eighteenth,
+        //Nineteenth,
+        //Twentieth,
+        //TwentyFirst,
+        //TwentySecond,
+        //TwentyThird,
+        //TwentyFourth,
+        //TwentyFifth,
+        //TwentySixth,
+        //TwentySeventh,
+        //TwentyEighth,
+        //TwentyNinth,
+        //Thirtieth,
+        //ThirtyFirst,
+        Last
+}
 
     public enum TimeUnit
     {
         Days,
-        Weeks, 
+        Weeks,
         Months,
-        Years 
+        Years
     }
 }

@@ -1,37 +1,61 @@
 ﻿using System;
+using TemporalExpressions.Rules;
 
 namespace TemporalExpressions
 {
-    public static class OccurOn
+    public static class Occur
     {
-        public static IRule Every(DayOfWeek dayOfWeek)
+        public static IRule On(DateTime date)
         {
-            return Every(1, dayOfWeek);
+            return new OnDate(date);
         }
 
-        public static IRule Every(int ordinal, DayOfWeek dayOfWeek)
+        public static IRule NotOn(DateTime date)
+        {
+            return new NotOnDate(date);
+        }
+
+        public static IRule OnEvery(DayOfWeek dayOfWeek)
+        {
+            return OnEvery(1, dayOfWeek);
+        }
+
+        internal static IRule OnThe(int ordinal, DayOfWeek dayOfWeek)
+        {
+            return new OnTheNthDayOfTheWeek(ordinal, dayOfWeek);
+        }
+
+        public static IRule OnEvery(int ordinal, DayOfWeek dayOfWeek)
         {
             return new EveryDayOfTheWeek(ordinal, dayOfWeek);
         }
 
-        public static IRule Every(int dayOfMonth)
+        public static IRule OnEvery(int dayOfMonth)
         {
-            return Every(1, dayOfMonth);
+            return OnEvery(1, dayOfMonth);
         }
 
-        public static IRule Every(int ordinal, int dayOfMonth)
+        public static IRule OnEvery(int ordinal, int dayOfMonth)
         {
             return new EveryDayOfTheMonth(dayOfMonth);
         }
 
-        public static IRule Every(TimeUnit unit)
+        public static IRule OnEvery(TimeUnit unit)
         {
-            return Every(1, unit);
+            return OnEvery(1, unit);
         }
 
-        public static IRule Every(int ordinal, TimeUnit unit)
+        public static IRule OnEvery(int ordinal, TimeUnit unit)
         {
-            return new EveryNthUnit(ordinal, unit);
+            switch (unit)
+            {
+                case TimeUnit.Days:
+                    return new EveryNthDay(ordinal);
+                case TimeUnit.Months:
+                    return new EveryNthMonth(ordinal);
+                default:
+                    throw new NotSupportedException();
+            }
         }
     }
 }
