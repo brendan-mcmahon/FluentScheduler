@@ -2,10 +2,10 @@
 using System;
 using TemporalExpressions;
 
-namespace UnitTests.ComplexRules
+namespace UnitTests.ScenarioTests
 {
     [TestClass]
-    public class Complex : RuleTestsBase
+    public class ScenarioTests : RuleTestsBase
     {
         [TestMethod]
         public void ShouldOccur_OntheSecondMondayEverySixMonths()

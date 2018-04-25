@@ -7,8 +7,6 @@ namespace TemporalExpressions
 {
     public class Recurrence
     {
-        private object r;
-
         public Recurrence()
         {
             Rules = new List<IRule>();

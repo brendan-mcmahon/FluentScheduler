@@ -53,11 +53,11 @@
         Last
 }
 
-public enum TimeUnit
-{
-    Days,
-    Weeks,
-    Months,
-    Years
-}
+    public enum TimeUnit
+    {
+        Days,
+        Weeks,
+        Months,
+        Years
+    }
 }
