@@ -30,24 +30,24 @@ The entry point for this library is on the Recurrence. Once you have a Recurrenc
 
 ###### More rule types will be added as it becomes apparent they are useful or needed. These are also very much open to extension if you have other ideas for implementation.
 
-### Occur.On(date)
+### Occur.On(DateTime date)
 Returns a rule that will evaluate true only on the provided date.
 
 Ex: On April 25, 2018
 
-### Occur.OnEvery(dayOfWeek)
+### Occur.OnEvery(DayOfWeek dayOfWeek)
 Returns a rule that will evaluate true on every instance of the given day of week
 
 Ex: Every Sunday
 
-### Occur.OnEvery(int (n), dayOfWeek)
+### Occur.OnEvery(int ordinal, DayOfWeek dayOfWeek)
 Returns a rule that will evaluate true every nth instance of the given day of week, regardless of where it falls in the month/year.
 
 Ex: Every 2nd Sunday
 
 Ex: Every 3 weeks on Wednesday
 
-### Occur.OnEvery(int (dayOfMonth))
+### Occur.OnEvery(int dayOfMonth)
 Returns a rule that will evaluate true on the same date each month.
 
 Ex: The 15th of each month
@@ -58,19 +58,19 @@ Ex: The 31st of every month will evaluate true on May 1st rather than April 31st
 
 Ex: The 29th of every month will evaluate true on March 1st rather than February 29th, unless it is a leap year.
 
-### Occur.OnEvery(int (n), int (dayOfMonth))
+### Occur.OnEvery(int ordinal, int dayOfMonth)
 Returns a rule that will evaluate true on the same date every n months.
 
 Ex: Every other month on the 15th.
 
 Ex: Every 6 Months on the 30th.
 
-### Occur.OnEvery(int (dayOfMonth), Month)
+### Occur.OnEvery(int dayOfMonth, Month month)
 Returns a rule that will evaluate true every year on the same date. Month is a public enum containing the names of all the months.
 
 Ex: Every December 25th
 
-### Occur.OnEvery(int (n), TimeUnit)
+### Occur.OnEvery(int ordinal, TimeUnit unit)
 Returns a rule that will evaluate true every n units. TimeUnit is a public enum containing the following units:
 * Days
 * Weeks
@@ -81,12 +81,12 @@ Ex: Every 4 days
 
 Ex: Every 2 Weeks (Note that this is the same functionality as OnEvery(dayOfWeek) without the ability to specify which dayOfWeek
 
-### Occur.OnThe(int (n), dayOfWeek)
+### Occur.OnThe(int ordinal, DayOfWeek dayOfWeek)
 Returns a rule that will evaluate true on the nth instance of the given day of week *within* a month.
 
 Ex: On the 1st Thursday of every month
 
-### Occur.Not(IRule)
+### Occur.Not(IRule rule)
 This returns whatever rule you pass in, after modifying it to reverse its evaluation and cancel out any other positive rule evaluations given this evaluates false.
 
 Ex: Every Wednesday, but not April 25th. This will supercede the 'every Wednesday' rule and evaluate false on that date.
