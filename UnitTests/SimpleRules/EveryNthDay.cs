@@ -11,38 +11,17 @@ namespace UnitTests
         {
             Recurrence.AddRule(Occur.OnEvery(TimeUnit.Days).StartingOn(StartDate));
 
-            Act(StartDate)
-                .ShouldBeTrue();
-
-            Act(StartDate.AddDays(1))
-                .ShouldBeTrue();
-
-            Act(StartDate.AddDays(2))
-                .ShouldBeTrue();
-
-            Act(StartDate.AddDays(3))
-                .ShouldBeTrue();
-
-            Act(StartDate.AddDays(4))
-                .ShouldBeTrue();
-
-            Act(StartDate.AddDays(5))
-                .ShouldBeTrue();
-
-            Act(StartDate.AddDays(6))
-                .ShouldBeTrue();
-
-            Act(StartDate.AddDays(7))
-                .ShouldBeTrue();
-
-            Act(StartDate.AddDays(8))
-                .ShouldBeTrue();
-
-            Act(StartDate.AddDays(9))
-                .ShouldBeTrue();
-
-            Act(StartDate.AddDays(10))
-                .ShouldBeTrue();
+            ShouldBeTrue(StartDate);
+            ShouldBeTrue(StartDate.AddDays(1));
+            ShouldBeTrue(StartDate.AddDays(2));
+            ShouldBeTrue(StartDate.AddDays(3));
+            ShouldBeTrue(StartDate.AddDays(4));
+            ShouldBeTrue(StartDate.AddDays(5));
+            ShouldBeTrue(StartDate.AddDays(6));
+            ShouldBeTrue(StartDate.AddDays(7));
+            ShouldBeTrue(StartDate.AddDays(8));
+            ShouldBeTrue(StartDate.AddDays(9));
+            ShouldBeTrue(StartDate.AddDays(10));
         }
 
         [TestMethod]
@@ -50,38 +29,17 @@ namespace UnitTests
         {
             Recurrence.AddRule(Occur.OnEvery(2, TimeUnit.Days).StartingOn(StartDate));
 
-            Act(StartDate)
-                .ShouldBeTrue();
-
-            Act(StartDate.AddDays(1))
-                .ShouldBeFalse();
-
-            Act(StartDate.AddDays(2))
-                .ShouldBeTrue();
-
-            Act(StartDate.AddDays(3))
-                .ShouldBeFalse();
-
-            Act(StartDate.AddDays(4))
-                .ShouldBeTrue();
-
-            Act(StartDate.AddDays(5))
-                .ShouldBeFalse();
-
-            Act(StartDate.AddDays(6))
-                .ShouldBeTrue();
-
-            Act(StartDate.AddDays(7))
-                .ShouldBeFalse();
-
-            Act(StartDate.AddDays(8))
-                .ShouldBeTrue();
-
-            Act(StartDate.AddDays(9))
-                .ShouldBeFalse();
-
-            Act(StartDate.AddDays(10))
-                .ShouldBeTrue();
+                ShouldBeTrue(StartDate);
+                ShouldBeFalse(StartDate.AddDays(1));
+                ShouldBeTrue(StartDate.AddDays(2));
+                ShouldBeFalse(StartDate.AddDays(3));
+                ShouldBeTrue(StartDate.AddDays(4));
+                ShouldBeFalse(StartDate.AddDays(5));
+                ShouldBeTrue(StartDate.AddDays(6));
+                ShouldBeFalse(StartDate.AddDays(7));
+                ShouldBeTrue(StartDate.AddDays(8));
+                ShouldBeFalse(StartDate.AddDays(9));
+                ShouldBeTrue(StartDate.AddDays(10));
         }
 
         [TestMethod]
@@ -89,38 +47,17 @@ namespace UnitTests
         {
             Recurrence.AddRule(Occur.OnEvery(3, TimeUnit.Days).StartingOn(StartDate));
 
-            Act(StartDate)
-                .ShouldBeTrue();
-
-            Act(StartDate.AddDays(1))
-                .ShouldBeFalse();
-
-            Act(StartDate.AddDays(2))
-                .ShouldBeFalse();
-
-            Act(StartDate.AddDays(3))
-                .ShouldBeTrue();
-
-            Act(StartDate.AddDays(4))
-                .ShouldBeFalse();
-
-            Act(StartDate.AddDays(5))
-                .ShouldBeFalse();
-
-            Act(StartDate.AddDays(6))
-                .ShouldBeTrue();
-
-            Act(StartDate.AddDays(7))
-                .ShouldBeFalse();
-
-            Act(StartDate.AddDays(8))
-                .ShouldBeFalse();
-
-            Act(StartDate.AddDays(9))
-                .ShouldBeTrue();
-
-            Act(StartDate.AddDays(10))
-                .ShouldBeFalse();
+            ShouldBeTrue(StartDate);
+            ShouldBeFalse(StartDate.AddDays(1));
+            ShouldBeFalse(StartDate.AddDays(2));
+            ShouldBeTrue(StartDate.AddDays(3));
+            ShouldBeFalse(StartDate.AddDays(4));
+            ShouldBeFalse(StartDate.AddDays(5));
+            ShouldBeTrue(StartDate.AddDays(6));
+            ShouldBeFalse(StartDate.AddDays(7));
+            ShouldBeFalse(StartDate.AddDays(8));
+            ShouldBeTrue(StartDate.AddDays(9));
+            ShouldBeFalse(StartDate.AddDays(10));
         }
     }
 }

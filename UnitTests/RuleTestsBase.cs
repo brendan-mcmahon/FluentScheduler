@@ -16,11 +16,6 @@ namespace UnitTests
             Recurrence = new Recurrence();
         }
 
-        public bool Act(DateTime date)
-        {
-            return Recurrence.Evaluate(date);
-        }
-
         public void ShouldBeTrue(DateTime date)
         {
             Assert.IsTrue(Recurrence.Evaluate(date), $"{date} has evaluated false");
