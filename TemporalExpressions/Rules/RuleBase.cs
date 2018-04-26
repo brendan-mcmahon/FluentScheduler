@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace TemporalExpressions.Rules
 {
-    public abstract class RuleBase : IRule, IHaveRules
+    public abstract class RuleBase : IRule
     {
-        public ICollection<IRule> Rules { get; set; }
+        public ICollection<IRule> Rules { get; private set; }
         public int Ordinal { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
@@ -19,6 +19,7 @@ namespace TemporalExpressions.Rules
             StartDate = startDate;
             Rules = new List<IRule>();
         }
+
 
         public IRule StartingOn(DateTime date)
         {
@@ -34,29 +35,34 @@ namespace TemporalExpressions.Rules
 
         public IRule OnThe(DayOfWeek dayOfWeek)
         {
-            Rules.Add(Occur.OnEvery(dayOfWeek));
+            AddRule(Occur.OnEvery(dayOfWeek));
             return this;
         }
 
         public IRule OnThe(int ordinal, DayOfWeek dayOfWeek)
         {
-            Rules.Add(Occur.OnThe(ordinal, dayOfWeek));
+            AddRule(Occur.OnThe(ordinal, dayOfWeek));
             return this;
         }
 
         public IRule OnThe(int dayOfMonth)
         {
-            Rules.Add(Occur.OnEvery(dayOfMonth));
+            AddRule(Occur.OnEvery(dayOfMonth));
             return this;
         }
 
         public IRule OnThe(int dayOfMonth, Month month)
         {
-            Rules.Add(Occur.OnEvery(dayOfMonth, month));
+            AddRule(Occur.OnEvery(dayOfMonth, month));
             return this;
         }
 
-        public bool EvaluateChain(DateTime date)
+
+        public bool Evaluate(DateTime date) =>
+            InvertEvaluation ? !FullEvaluation(date) : FullEvaluation(date);
+        public abstract bool InnerEvaluation(DateTime date);
+
+        private bool EvaluateChain(DateTime date)
         {
             foreach (var rule in Rules)
             {
@@ -66,16 +72,13 @@ namespace TemporalExpressions.Rules
             return true;
         }
 
-        public bool IsWithinRange(DateTime date)
+        private bool IsWithinRange(DateTime date)
         {
             if (EndDate.HasValue)
                 return date >= StartDate && date <= EndDate.Value;
 
             return date >= StartDate;
         }
-
-        public bool Evaluate(DateTime date) =>
-            InvertEvaluation ? !FullEvaluation(date) : FullEvaluation(date);
 
         private bool FullEvaluation(DateTime date)
         {
@@ -89,11 +92,15 @@ namespace TemporalExpressions.Rules
             return false;
         }
 
-        public abstract bool InnerEvaluation(DateTime date);
 
         public IRule And()
         {
             throw new NotImplementedException();
+        }
+
+        public void AddRule(IRule rule)
+        {
+            Rules.Add(rule);
         }
     }
 }

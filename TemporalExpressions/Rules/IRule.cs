@@ -5,7 +5,7 @@ namespace TemporalExpressions.Rules
 {
     public interface IRule
     {
-        ICollection<IRule> Rules { get; set; }
+        ICollection<IRule> Rules { get; }
         int Ordinal { get; set; }
         DateTime StartDate { get; set; }
         DateTime? EndDate { get; set; }
@@ -21,11 +21,5 @@ namespace TemporalExpressions.Rules
         IRule OnThe(int dayOfMonth, Month month);
 
         bool Evaluate(DateTime date);
-
     }
-
-    /*Other class ideas:
-     * The Last X of Y
-     * 
-     */
 }

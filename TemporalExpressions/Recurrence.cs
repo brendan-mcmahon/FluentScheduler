@@ -9,14 +9,14 @@ namespace TemporalExpressions
     {
         public Recurrence()
         {
-            rules = new List<IRule>();
+            Rules = new List<IRule>();
         }
 
-        private ICollection<IRule> rules;
+        public ICollection<IRule> Rules { get; private set; }
 
         public Recurrence AddRule(IRule rule)
         {
-            rules.Add(rule);
+            Rules.Add(rule);
 
             return this;
         }
@@ -30,10 +30,10 @@ namespace TemporalExpressions
 
         public bool Evaluate(DateTime date)
         {
-            if (rules.Where(r => r.OverrideIfEvaluationFails).Any(r => !r.Evaluate(date)))
+            if (Rules.Where(r => r.OverrideIfEvaluationFails).Any(r => !r.Evaluate(date)))
                 return false;
 
-            if (rules.Where(r => !r.OverrideIfEvaluationFails).Any(r => r.Evaluate(date)))
+            if (Rules.Where(r => !r.OverrideIfEvaluationFails).Any(r => r.Evaluate(date)))
                 return true;
 
             return false;
