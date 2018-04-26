@@ -10,6 +10,7 @@ namespace TemporalExpressions.Rules
         DateTime StartDate { get; set; }
         DateTime? EndDate { get; set; }
         bool OverrideIfEvaluationFails { get; set; }
+        bool InvertEvaluation { get; set; }
 
         IRule StartingOn(DateTime date);
         IRule EndingOn(DateTime date);
@@ -17,8 +18,10 @@ namespace TemporalExpressions.Rules
         IRule OnThe(DayOfWeek dayOfWeek);
         IRule OnThe(int ordinal, DayOfWeek dayOfWeek);
         IRule OnThe(int dayOfMonth);
+        IRule OnThe(int dayOfMonth, Month month);
 
         bool Evaluate(DateTime date);
+
     }
 
     /*Other class ideas:

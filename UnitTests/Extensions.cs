@@ -15,10 +15,5 @@ namespace UnitTests
         {
             Assert.IsFalse(boolean);
         }
-
-        public static void AddRule(this Recurrence recurrence, IRule rule)
-        {
-            recurrence.Rules.Add(rule);
-        }
     }
 }

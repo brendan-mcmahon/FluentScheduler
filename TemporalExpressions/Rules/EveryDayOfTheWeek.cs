@@ -14,17 +14,9 @@ namespace TemporalExpressions.Rules
             DayOfWeek = dayOfTheWeek;
         }
 
-        public override bool Evaluate(DateTime date)
-        {
-            if (EvaluateChain(date))
-            {
-                if (!IsWithinRange(date)) return false;
-
-                if (date.DayOfWeek == DayOfWeek && IsDivisibleByOrdinal(date)) return true;
-            }
-
-            return false;
-        }
+        public override bool InnerEvaluation(DateTime date) =>
+            date.DayOfWeek == DayOfWeek && IsDivisibleByOrdinal(date);
+        
 
         private bool IsDivisibleByOrdinal(DateTime date)
         {
@@ -36,6 +28,8 @@ namespace TemporalExpressions.Rules
 
         private DateTime MostRecentInstanceOfDayOfWeek()
         {
+            if (DayOfWeek == StartDate.DayOfWeek) return StartDate;
+
             var difference = Math.Abs(DayOfWeek - (StartDate.DayOfWeek + 7));
             return StartDate.AddDays(-difference);
         }

@@ -10,11 +10,6 @@ namespace TemporalExpressions
             return new OnDate(date);
         }
 
-        public static IRule NotOn(DateTime date)
-        {
-            return new NotOnDate(date);
-        }
-
         public static IRule OnEvery(DayOfWeek dayOfWeek)
         {
             return OnEvery(1, dayOfWeek);
@@ -35,6 +30,11 @@ namespace TemporalExpressions
             return OnEvery(1, dayOfMonth);
         }
 
+        public static IRule OnEvery(int dayOfMonth, Month month)
+        {
+            return new EveryDayOfTheYear(1, dayOfMonth, month);
+        }
+
         public static IRule OnEvery(int ordinal, int dayOfMonth)
         {
             return new EveryDayOfTheMonth(dayOfMonth);
@@ -51,11 +51,23 @@ namespace TemporalExpressions
             {
                 case TimeUnit.Days:
                     return new EveryNthDay(ordinal);
+                case TimeUnit.Weeks:
+                    return new OnTheNthDayOfTheWeek(ordinal);
                 case TimeUnit.Months:
                     return new EveryNthMonth(ordinal);
+                case TimeUnit.Years:
+                    return new EveryNthYear(ordinal);
                 default:
                     throw new NotSupportedException();
             }
+        }
+
+        public static IRule Not(IRule rule)
+        {
+            rule.OverrideIfEvaluationFails = true;
+            rule.InvertEvaluation = true;
+
+            return rule;
         }
     }
 }

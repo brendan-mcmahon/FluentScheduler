@@ -7,24 +7,21 @@ namespace TemporalExpressions
     {
         public DayOfWeek DayOfWeek;
 
+        public OnTheNthDayOfTheWeek(int ordinal)
+        {
+            Ordinal = ordinal;
+            DayOfWeek = StartDate.DayOfWeek;
+        }
+
         public OnTheNthDayOfTheWeek(int ordinal, DayOfWeek dayOfWeek)
         {
             Ordinal = ordinal;
             DayOfWeek = dayOfWeek;
         }
 
-        public override bool Evaluate(DateTime date)
-        {
-            if (EvaluateChain(date))
-            {
-                if (!IsWithinRange(date)) return false;
-
-                return date.DayOfWeek == DayOfWeek &&
-                date.Day > (7 * (Ordinal - 1)) &&
-                (date.Day <= 7 * Ordinal);
-            }
-
-            return false;
-        }
+        public override bool InnerEvaluation(DateTime date) =>
+            date.DayOfWeek == DayOfWeek &&
+            date.Day > (7 * (Ordinal - 1)) &&
+            date.Day <= (7 * Ordinal);
     }
 }

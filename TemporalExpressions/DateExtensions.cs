@@ -2,7 +2,7 @@
 
 namespace TemporalExpressions
 {
-    public static class HelperExtensions
+    public static class DateExtensions
     {
         public static bool MonthFollowsMonthWithLessThan31Days(this DateTime date) =>
             (date.Month == (int) Month.March ||

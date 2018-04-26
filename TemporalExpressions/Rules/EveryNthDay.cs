@@ -9,20 +9,10 @@ namespace TemporalExpressions.Rules
             Ordinal = ordinal;
         }
 
-        public override bool Evaluate(DateTime date)
-        {
-            if (EvaluateChain(date)){
+        public override bool InnerEvaluation(DateTime date) =>
+            DaysBetweenStartAndDate(date) % Ordinal == 0;
 
-                if (!IsWithinRange(date)) return false;
-
-                var days = GetDaysInbetweenDates(date);
-                return (days % Ordinal == 0);
-            }
-
-            return false;
-        }
-
-        private int GetDaysInbetweenDates(DateTime date) =>
+        private int DaysBetweenStartAndDate(DateTime date) =>
             (date - StartDate).Days;
         
     }

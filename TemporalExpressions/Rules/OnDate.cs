@@ -5,12 +5,14 @@ namespace TemporalExpressions
 {
     public class OnDate : RuleBase
     {
+        DateTime Date { get; set; }
+
         public OnDate(DateTime date)
         {
-            StartDate = date;
+            Date = date;
         }
 
-        public override bool Evaluate(DateTime date) =>
-            date == StartDate;
+        public override bool InnerEvaluation(DateTime date) =>
+            date == Date;
     }
 }

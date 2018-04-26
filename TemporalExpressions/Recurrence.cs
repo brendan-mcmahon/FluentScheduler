@@ -9,17 +9,31 @@ namespace TemporalExpressions
     {
         public Recurrence()
         {
-            Rules = new List<IRule>();
+            rules = new List<IRule>();
         }
 
-        public ICollection<IRule> Rules { get; set; }
+        private ICollection<IRule> rules;
+
+        public Recurrence AddRule(IRule rule)
+        {
+            rules.Add(rule);
+
+            return this;
+        }
+
+        public Recurrence And(IRule rule)
+        {
+            AddRule(rule);
+
+            return this;
+        }
 
         public bool Evaluate(DateTime date)
         {
-            if (Rules.Any(r => r.OverrideIfEvaluationFails && !r.Evaluate(date)))
+            if (rules.Where(r => r.OverrideIfEvaluationFails).Any(r => !r.Evaluate(date)))
                 return false;
 
-            if (Rules.Any(r => r.Evaluate(date)))
+            if (rules.Where(r => !r.OverrideIfEvaluationFails).Any(r => r.Evaluate(date)))
                 return true;
 
             return false;

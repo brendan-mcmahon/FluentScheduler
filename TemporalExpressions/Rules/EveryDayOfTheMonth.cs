@@ -14,19 +14,9 @@ namespace TemporalExpressions.Rules
             Day = dayOfTheMonth;
         }
 
-        public override bool Evaluate(DateTime date)
-        {
-            if (EvaluateChain(date))
-            {
-                if (!IsWithinRange(date)) return false;
-
-                if (DateOverflowsToNextMonth(date) && date.Day == 1) return true;
-
-                if (date.Day == Day) return true;
-            }
-
-            return false;
-        }
+        public override bool InnerEvaluation(DateTime date) =>
+            DateOverflowsToNextMonth(date) && date.Day == 1 ||
+            date.Day == Day;
 
         private bool DateOverflowsToNextMonth(DateTime date) =>
                 (date.MonthFollowsMonthWithLessThan31Days() && Day > 30) ||

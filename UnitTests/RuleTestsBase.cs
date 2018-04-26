@@ -20,5 +20,26 @@ namespace UnitTests
         {
             return Recurrence.Evaluate(date);
         }
+
+        public void ShouldBeTrue(DateTime date)
+        {
+            Assert.IsTrue(Recurrence.Evaluate(date), $"{date} has evaluated false");
+        }
+
+        public void ShouldBeTrue(int year, int month, int date)
+        {
+            ShouldBeTrue(new DateTime(year, month, date));
+        }
+
+        public void ShouldBeFalse(DateTime date)
+        {
+            Assert.IsFalse(Recurrence.Evaluate(date), $"{date} has evaluated true");
+        }
+
+        public void ShouldBeFalse(int year, int month, int date)
+        {
+            ShouldBeFalse(new DateTime(year, month, date));
+        }
+
     }
 }
