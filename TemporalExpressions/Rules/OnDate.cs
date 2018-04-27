@@ -12,7 +12,7 @@ namespace TemporalExpressions
             Date = date;
         }
 
-        public override bool InnerEvaluation(DateTime date) =>
+        internal override bool InnerEvaluation(DateTime date) =>
             date == Date;
     }
 }

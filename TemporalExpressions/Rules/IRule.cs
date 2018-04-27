@@ -15,7 +15,6 @@ namespace TemporalExpressions.Rules
         IRule StartingOn(DateTime date);
         IRule EndingOn(DateTime date);
 
-        IRule OnThe(DayOfWeek dayOfWeek);
         IRule OnThe(int ordinal, DayOfWeek dayOfWeek);
         IRule OnThe(int dayOfMonth);
         IRule OnThe(int dayOfMonth, Month month);
