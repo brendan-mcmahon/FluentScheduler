@@ -52,7 +52,7 @@ Returns a rule that will evaluate true on the same date each month.
 
 Ex: The 15th of each month
 
-*Note: Right now the default behavior for months with fewer days is to overflow to the first of the following month
+Note: Right now the default behavior for months with fewer days is to overflow to the first of the following month
 
 Ex: The 31st of every month will evaluate true on May 1st rather than April 31st.
 
