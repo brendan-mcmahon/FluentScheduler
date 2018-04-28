@@ -9,7 +9,7 @@ namespace TemporalExpressions.Rules
             Ordinal = ordinal;
         }
 
-        public override bool InnerEvaluation(DateTime date) =>
+        internal override bool InnerEvaluation(DateTime date) =>
             (MonthsBetweenStartAndDate(date) % Ordinal == 0);
 
         private int MonthsBetweenStartAndDate(DateTime date)

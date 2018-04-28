@@ -3,7 +3,7 @@ using TemporalExpressions.Rules;
 
 namespace TemporalExpressions
 {
-    internal class OnTheNthDayOfTheWeek : RuleBase
+    public class OnTheNthDayOfTheWeek : RuleBase
     {
         public DayOfWeek DayOfWeek;
 
@@ -19,7 +19,7 @@ namespace TemporalExpressions
             DayOfWeek = dayOfWeek;
         }
 
-        public override bool InnerEvaluation(DateTime date) =>
+        internal override bool InnerEvaluation(DateTime date) =>
             date.DayOfWeek == DayOfWeek &&
             date.Day > (7 * (Ordinal - 1)) &&
             date.Day <= (7 * Ordinal);

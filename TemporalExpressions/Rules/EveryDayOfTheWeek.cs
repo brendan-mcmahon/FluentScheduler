@@ -14,7 +14,7 @@ namespace TemporalExpressions.Rules
             DayOfWeek = dayOfTheWeek;
         }
 
-        public override bool InnerEvaluation(DateTime date) =>
+        internal override bool InnerEvaluation(DateTime date) =>
             date.DayOfWeek == DayOfWeek && IsDivisibleByOrdinal(date);
         
 

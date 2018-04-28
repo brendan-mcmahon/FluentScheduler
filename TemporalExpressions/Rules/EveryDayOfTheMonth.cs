@@ -14,7 +14,7 @@ namespace TemporalExpressions.Rules
             Day = dayOfTheMonth;
         }
 
-        public override bool InnerEvaluation(DateTime date) =>
+        internal override bool InnerEvaluation(DateTime date) =>
             DateOverflowsToNextMonth(date) && date.Day == 1 ||
             date.Day == Day;
 
