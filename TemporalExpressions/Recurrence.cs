@@ -10,12 +10,13 @@ namespace TemporalExpressions
     /// </summary>
     public class Recurrence
     {
-        public Recurrence()
+        public Recurrence() : this(new List<IRule>()) { }
+        public Recurrence(ICollection<IRule> rules)
         {
-            Rules = new List<IRule>();
+            Rules = rules;
         }
 
-        public ICollection<IRule> Rules { get; private set; }
+        public ICollection<IRule> Rules { get; set; }
 
         /// <summary>
         /// Adds a rule to the Recurrence. </summary>
@@ -41,7 +42,7 @@ namespace TemporalExpressions
 
         /// <summary>
         /// Evaluates whether or not a date occurs according to the rules of Recurrence. </summary>
-        /// <param name="rule"> The date to be evaluated. </param>
+        /// <param name="date"> The date to be evaluated. </param>
         /// <returns> True if the date occurs, false otherwise. </returns>
         public bool Evaluate(DateTime date)
         {

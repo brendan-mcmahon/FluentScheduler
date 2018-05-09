@@ -5,7 +5,7 @@ namespace TemporalExpressions.Rules
 {
     public interface IRule
     {
-        ICollection<IRule> Rules { get; }
+        ICollection<IRule> Rules { get; set; }
         int Ordinal { get; set; }
         DateTime StartDate { get; set; }
         DateTime? EndDate { get; set; }
@@ -13,7 +13,7 @@ namespace TemporalExpressions.Rules
         bool InvertEvaluation { get; set; }
 
         IRule StartingOn(DateTime date);
-        IRule EndingOn(DateTime date);
+        IRule EndingOn(DateTime? date);
 
         IRule OnThe(int ordinal, DayOfWeek dayOfWeek);
         IRule OnThe(int dayOfMonth);

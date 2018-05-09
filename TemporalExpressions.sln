@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{7A2936E7-FF23-4886-9CA1-2D404A4BA8C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpressionsTests", "UnitTests\ExpressionsTests.csproj", "{7A2936E7-FF23-4886-9CA1-2D404A4BA8C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemporalExpressions", "TemporalExpressions\TemporalExpressions.csproj", "{30DFC119-4D81-4E6D-80FB-C6B9579B4FEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemporalExpressions", "TemporalExpressions\TemporalExpressions.csproj", "{30DFC119-4D81-4E6D-80FB-C6B9579B4FEE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemporalDeserializer", "TemporalDeserializer\TemporalDeserializer.csproj", "{E96571CF-11D9-4FF7-A7FE-8E60A6FDF1F6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeserializerTests", "DeserializerTests\DeserializerTests.csproj", "{0872EF4D-BC7D-4451-8393-C2F2CD176DCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{552A820A-B86E-4C01-9468-785653CF6E86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{30DFC119-4D81-4E6D-80FB-C6B9579B4FEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30DFC119-4D81-4E6D-80FB-C6B9579B4FEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30DFC119-4D81-4E6D-80FB-C6B9579B4FEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E96571CF-11D9-4FF7-A7FE-8E60A6FDF1F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E96571CF-11D9-4FF7-A7FE-8E60A6FDF1F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E96571CF-11D9-4FF7-A7FE-8E60A6FDF1F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E96571CF-11D9-4FF7-A7FE-8E60A6FDF1F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0872EF4D-BC7D-4451-8393-C2F2CD176DCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0872EF4D-BC7D-4451-8393-C2F2CD176DCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0872EF4D-BC7D-4451-8393-C2F2CD176DCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0872EF4D-BC7D-4451-8393-C2F2CD176DCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{552A820A-B86E-4C01-9468-785653CF6E86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{552A820A-B86E-4C01-9468-785653CF6E86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{552A820A-B86E-4C01-9468-785653CF6E86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{552A820A-B86E-4C01-9468-785653CF6E86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

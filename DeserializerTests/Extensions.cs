@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ExpressionsTests
+namespace DeserializerTests
 {
     public static class Extensions
     {

@@ -1,0 +1,38 @@
+﻿[
+  {
+    "RecurrenceType": "OnEvery",
+    "DayOfWeek": "Tuesday",
+    "Ordinal": 1,
+    "StartDate":  "2018-5-1"
+  },
+
+  {
+    "RecurrenceType": "OnEvery",
+    "DayOfMonth": 15,
+    "Rules": [
+      {
+        "RecurrenceType": "OnEvery",
+        "Ordinal": 2,
+        "TimeUnit": "Months"
+      }
+    ],
+    "StartDate": "2018-5-1"
+  },
+
+  {
+    "RecurrenceType": "On",
+    "Date": "2018-04-28",
+    "StartDate": "2018-4-28"
+  },
+
+  {
+    "RecurrenceType": "Not",
+    "Rules": [
+      {
+        "RecurrenceType": "On",
+        "Date": "2018-5-13"
+      }
+    ],
+    "StartDate": "2018-5-1"
+  }
+]

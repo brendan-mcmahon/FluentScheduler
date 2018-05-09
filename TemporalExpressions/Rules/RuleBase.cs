@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using TemporalDeserializer;
 
 namespace TemporalExpressions.Rules
 {
     public abstract class RuleBase : IRule
     {
+        //TODO: Make setter internal
         /// <summary> Rules that are evaluated before this rule. </summary>
-        public ICollection<IRule> Rules { get; private set; }
+        public ICollection<IRule> Rules { get; set; }
         /// <summary> The Ordinal which can be applied as the Nth of any given rule. </summary>
         public int Ordinal { get; set; }
         /// <summary> Evaluation will yield false if the date is before the StartDate. Defaults to DateTime.Today </summary>
@@ -18,29 +21,31 @@ namespace TemporalExpressions.Rules
         /// <summary> When set to true, this rule's evaluation result will be inverted. (ie. if the date evaluates true, the result will be false, and vice versa) </summary>
         public bool InvertEvaluation { get; set; }
 
-        public RuleBase() : this(DateTime.Today) { }
+        protected RuleBase() : this(DateTime.Today) { }
 
-        public RuleBase(DateTime startDate)
+        protected RuleBase(DateTime startDate)
         {
             StartDate = startDate;
             Rules = new List<IRule>();
         }
 
-        /// <summary> Sets the StartDate on this rule. </summary>
+        /// <summary> Sets the StartDate on this rule, as well as any subrules. </summary>
         /// <param name="date">The date to set the StartDate to. </param>
         /// <returns> This IRule </returns>
         public IRule StartingOn(DateTime date)
         {
             StartDate = date;
+            Rules.ForEach(r => r.StartingOn(date));
             return this;
         }
 
-        /// <summary> Sets the EndDate on this rule. </summary>
+        /// <summary> Sets the EndDate on this rule, as well as any subrules. </summary>
         /// <param name="date">The date to set the EndDate to. </param>
         /// <returns> This IRule </returns>
-        public IRule EndingOn(DateTime date)
+        public IRule EndingOn(DateTime? date)
         {
             EndDate = date;
+            Rules.ForEach(r => r.EndingOn(date));
             return this;
         }
 
@@ -81,17 +86,11 @@ namespace TemporalExpressions.Rules
         /// <returns> True if the date occurs according to the rules, otherwise false. </returns>
         public bool Evaluate(DateTime date) =>
             InvertEvaluation ? !FullEvaluation(date) : FullEvaluation(date);
+
         internal abstract bool InnerEvaluation(DateTime date);
 
-        private bool EvaluateChain(DateTime date)
-        {
-            foreach (var rule in Rules)
-            {
-                if (!rule.Evaluate(date)) return false;
-            }
-
-            return true;
-        }
+        private bool EvaluateChain(DateTime date) =>
+            Rules.All(r => r.Evaluate(date));
 
         private bool IsWithinRange(DateTime date)
         {
@@ -101,31 +100,14 @@ namespace TemporalExpressions.Rules
             return date >= StartDate;
         }
 
-        private bool FullEvaluation(DateTime date)
-        {
-            if (EvaluateChain(date))
-            {
-                if (IsWithinRange(date))
-                {
-                    return InnerEvaluation(date);
-                }
-            }
-            return false;
-        }
-
-
-        public IRule And()
-        {
-            throw new NotImplementedException();
-        }
+        private bool FullEvaluation(DateTime date) =>
+            (EvaluateChain(date) && IsWithinRange(date)) && InnerEvaluation(date);
 
         /// <summary>
         /// Adds a sub-rule to the Rule. </summary>
         /// <param name="rule"> The rule to be added to the rules collection. </param>
         /// <returns>This Rule with the new sub-rule. </returns>
-        public void AddRule(IRule rule)
-        {
+        public void AddRule(IRule rule) => 
             Rules.Add(rule);
-        }
     }
 }

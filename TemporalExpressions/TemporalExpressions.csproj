@@ -3,11 +3,19 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.1</Version>
+    <Version>0.0.2.7</Version>
     <PackageTags>schedule, time, fluent, temporal</PackageTags>
     <RepositoryUrl>https://github.com/brendan-mcmahon/FluentScheduler</RepositoryUrl>
     <Company />
     <Authors>Brendan McMahon</Authors>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>C:\Users\asus g11\Source\Repos\LocalNuget\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+  </ItemGroup>
 
 </Project>

@@ -2,7 +2,7 @@
 using System;
 using TemporalExpressions;
 
-namespace UnitTests.ScenarioTests
+namespace ExpressionsTests.ScenarioTests
 {
     [TestClass]
     public class ScenarioTests : RuleTestsBase
@@ -22,6 +22,21 @@ namespace UnitTests.ScenarioTests
             ShouldBeFalse(2018, 10, 29);
             ShouldBeFalse(2018, 11, 8);
             ShouldBeTrue(2019, 4, 8);
+        }
+
+        [TestMethod]
+        public void ShouldOccur_Onthe15thEveryTwoMonths()
+        {
+            Recurrence.AddRule(
+                Occur.OnEvery(2, TimeUnit.Months)
+                     .OnThe(15)
+                     .StartingOn(StartDate));
+
+            ShouldBeFalse(2018, 4, 1);
+            ShouldBeTrue(2018, 4, 15);
+            ShouldBeFalse(2018, 5, 15);
+            ShouldBeFalse(2018, 5, 16);
+            ShouldBeTrue(2018, 6, 15);
         }
 
         [TestMethod]

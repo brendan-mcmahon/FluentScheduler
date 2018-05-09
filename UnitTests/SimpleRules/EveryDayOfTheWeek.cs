@@ -1,8 +1,8 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TemporalExpressions;
 
-namespace UnitTests
+namespace ExpressionsTests.SimpleRules
 {
     [TestClass]
     public class EveryDayOfTheWeek : RuleTestsBase

@@ -43,14 +43,6 @@ namespace TemporalExpressions
         /// <param name="dayOfMonth"> The day of the month for the Reccurence to occur on </param>
         /// <returns>IRule evaluating true on the Nth every month.</returns>
         public static IRule OnEvery(int dayOfMonth) => 
-            OnEvery(1, dayOfMonth);
-
-        /// <summary>
-        /// Evaluates to true on every Nth day each month.</summary>
-        /// <param name="ordinal"> The ordinal value for the expression (eg. the Nth day of every month where N is ordinal) </param>
-        /// <param name="dayOfMonth"> The day of the month for the Reccurence to occur on </param>
-        /// <returns>IRule evaluating true on the Nth every month.</returns>
-        public static IRule OnEvery(int ordinal, int dayOfMonth) => 
             new EveryDayOfTheMonth(dayOfMonth);
 
         /// <summary>
@@ -59,7 +51,7 @@ namespace TemporalExpressions
         /// <param name="month"> The month for the Reccurence to occur on. </param>
         /// <returns>IRule evaluating true on the Nth every month every X Years.</returns>
         public static IRule OnEvery(int dayOfMonth, Month month) =>
-            new EveryDayOfTheYear(1, dayOfMonth, month);
+            new EveryDayOfTheYear(dayOfMonth, month);
 
         /// <summary>
         /// Evaluates to true on every given unit of time.</summary>
@@ -68,6 +60,7 @@ namespace TemporalExpressions
         public static IRule OnEvery(TimeUnit unit) => 
             OnEvery(1, unit);
 
+        //TODO: switch statement
         /// <summary>
         /// Evaluates to true on every Nth number of the given unit of time.</summary>
         /// <param name="ordinal"> The ordinal value for the expression (eg. the Nth number of the given unit, where N is ordinal). </param>

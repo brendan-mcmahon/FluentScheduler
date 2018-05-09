@@ -1,7 +1,6 @@
 ﻿using System;
-using TemporalExpressions.Rules;
 
-namespace TemporalExpressions
+namespace TemporalExpressions.Rules
 {
     public class OnTheNthDayOfTheWeek : RuleBase
     {

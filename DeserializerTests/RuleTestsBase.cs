@@ -1,27 +1,26 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.IO;
+using TemporalDeserializer;
 using TemporalExpressions;
 
-namespace ExpressionsTests
+namespace DeserializerTests
 {
     [TestClass]
     public class RuleTestsBase
     {
         public Recurrence Recurrence;
-        public DateTime StartDate = new DateTime(2018, 4, 1);
+        public string Json;
 
-        [TestInitialize]
-        public void Arrange()
-        {
-            Recurrence = new Recurrence();
-        }
+        public void Deserialize() =>
+            Recurrence = RulesDeserializer.Deserialize(File.ReadAllText(Json));
 
         public void ShouldBeTrue(DateTime date)
         {
             Assert.IsTrue(Recurrence.Evaluate(date), $"{date} has evaluated false");
         }
 
-        public void ShouldBeTrue(int year, int month, int date)
+        public void ShouldEvaluateTrue(int year, int month, int date)
         {
             ShouldBeTrue(new DateTime(year, month, date));
         }
@@ -31,7 +30,7 @@ namespace ExpressionsTests
             Assert.IsFalse(Recurrence.Evaluate(date), $"{date} has evaluated true");
         }
 
-        public void ShouldBeFalse(int year, int month, int date)
+        public void ShouldEvaluateFalse(int year, int month, int date)
         {
             ShouldBeFalse(new DateTime(year, month, date));
         }

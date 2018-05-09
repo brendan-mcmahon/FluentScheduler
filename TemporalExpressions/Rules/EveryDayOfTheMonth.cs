@@ -6,11 +6,8 @@ namespace TemporalExpressions.Rules
     {
         public int Day { get; set; }
 
-        public EveryDayOfTheMonth(int dayOfTheMonth) : this(1, dayOfTheMonth) { }
-
-        public EveryDayOfTheMonth(int ordinal, int dayOfTheMonth)
+        public EveryDayOfTheMonth(int dayOfTheMonth)
         {
-            Ordinal = ordinal;
             Day = dayOfTheMonth;
         }
 

@@ -1,18 +1,14 @@
 ﻿using System;
-using TemporalExpressions.Rules;
 
-namespace TemporalExpressions
+namespace TemporalExpressions.Rules
 {
     public class EveryDayOfTheYear : RuleBase
     {
         public int Day { get; set; }
         public Month Month { get; set; }
 
-        public EveryDayOfTheYear(int dayOfTheMonth, Month month) : this(1, dayOfTheMonth, month) { }
-
-        public EveryDayOfTheYear(int ordinal, int dayOfTheMonth, Month month)
+        public EveryDayOfTheYear(int dayOfTheMonth, Month month)
         {
-            Ordinal = ordinal;
             Day = dayOfTheMonth;
             Month = month;
         }

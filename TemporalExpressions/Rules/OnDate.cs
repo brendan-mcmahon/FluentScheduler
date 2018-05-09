@@ -1,18 +1,15 @@
 ﻿using System;
-using TemporalExpressions.Rules;
 
-namespace TemporalExpressions
+namespace TemporalExpressions.Rules
 {
     public class OnDate : RuleBase
     {
-        DateTime Date { get; set; }
+        private readonly DateTime _date;
 
-        public OnDate(DateTime date)
-        {
-            Date = date;
-        }
+        public OnDate(DateTime date) => 
+            _date = date;
 
         internal override bool InnerEvaluation(DateTime date) =>
-            date == Date;
+            date == _date;
     }
 }

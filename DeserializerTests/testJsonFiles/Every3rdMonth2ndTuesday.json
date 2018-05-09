@@ -1,0 +1,15 @@
+﻿[
+  {
+    "RecurrenceType": "OnEvery",
+    "Ordinal": 3,
+    "TimeUnit": "Months",
+    "Rules": [
+      {
+        "RecurrenceType": "OnThe",
+        "Ordinal":  2,
+        "DayOfWeek": "Tuesday"
+      }
+    ],
+    "StartDate": "2018-5-1"
+  }
+]

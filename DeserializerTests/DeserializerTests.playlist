@@ -1,0 +1,1 @@
+<Playlist Version="1.0"><Add Test="DeserializerTests.UnitTest1.TestMethod1" /><Add Test="DeserializerTests.Integration.CreatesFourRules" /><Add Test="DeserializerTests.Integration.CreatesEveryTuesday" /></Playlist>
