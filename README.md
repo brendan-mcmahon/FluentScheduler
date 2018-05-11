@@ -1,4 +1,9 @@
-# FluentScheduler
+## Jump to:
+
+* [Fluent Expressions](#expressions)
+* [Json Deserializer](#deserializer)
+
+# <a name="expressions"></a> Fluent Expressions
 The goal of the FluentScheduler is to provide a fluent way to write out simple, complex, or compound scheduled events, which can then evaluate a date to determine if it falls into that schedule.
 
 For example - say you and a friend pooled your tickets at Chuck E. Cheese to purchase a Tomagachi. Since your friend had more tickets than you, you get the short straw when it comes time to decide custody. The end result is:
@@ -90,3 +95,68 @@ Ex: On the 1st Thursday of every month
 This returns whatever rule you pass in, after modifying it to reverse its evaluation and cancel out any other positive rule evaluations given this evaluates false.
 
 Ex: Every Wednesday, but not April 25th. This will supercede the 'every Wednesday' rule and evaluate false on that date.
+
+
+# <a name="deserializer"></a> Json Deserializer
+
+You can create rules for your recurrences using a Json collection by passing them into the deserializer. The entry point to this logic is the Deserialize() method in the RulesDeserializer static class. Given a valid collection of objects, the method will return a collection of IRules.
+
+## Valid Json
+
+A valid Json object must be an array. A single rule will not currently process.
+
+Each rule has a required Recurrence Type ([defined as this enum](https://github.com/brendan-mcmahon/FluentScheduler/blob/74717438a961e28ec94b902b030db8d1512b4bb7/TemporalDeserializer/RecurrenceType.cs#L1)), each with its own secondary requirements:
+* On
+  * Requires "Date" field (creates OnDate rule)
+* OnEvery
+  * Requires one of the following fields:
+    * "DayOfWeek" (creates EveryDayOfTheWeek rule)
+    * "DayOfMonth" (creates EveryDayOfTheMonth rule)
+    * "DayOfMonth" and "Month" (creates EveryDayOfTheYear rule)
+    * "TimeUnit" (creates EveryNthUnit rule)
+* OnThe
+  * Requires "DayOfWeek" field (creates OnTheNthDayOfTheWeek rule)
+* Not
+  * Requires "Rules" field, which should be a second array of rules, containing the rule to be inverted (Creates the inner Rule with OverrideIfEvaluationFails and InvertEvaluation flags set to true)
+
+### Example:
+```json
+[
+  {
+    "RecurrenceType": "OnEvery",
+    "DayOfWeek": "Tuesday",
+    "Ordinal": 1,
+    "StartDate":  "2018-5-1"
+  },
+
+  {
+    "RecurrenceType": "OnEvery",
+    "DayOfMonth": 15,
+    "Rules": [
+      {
+        "RecurrenceType": "OnEvery",
+        "Ordinal": 2,
+        "TimeUnit": "Months"
+      }
+    ],
+    "StartDate": "2018-5-1"
+  },
+
+  {
+    "RecurrenceType": "On",
+    "Date": "2018-04-28",
+    "StartDate": "2018-4-28"
+  },
+
+  {
+    "RecurrenceType": "Not",
+    "Rules": [
+      {
+        "RecurrenceType": "On",
+        "Date": "2018-5-13"
+      }
+    ],
+    "StartDate": "2018-5-1"
+  }
+]
+```
