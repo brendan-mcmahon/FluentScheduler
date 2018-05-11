@@ -32,25 +32,6 @@ namespace TemporalDeserializer
             return newRule;
         }
 
-        //private static IRule DecideAndAddOnEveryRule(RuleInfo rule)
-        //{
-        //    var newRule =
-        //        (rule.DayOfWeek.HasValue) ?
-        //            Occur.OnEvery(rule.Ordinal, rule.DayOfWeek.Value) :
-
-        //        (rule.DayOfMonth.HasValue && !rule.Month.HasValue) ?
-        //            Occur.OnEvery(rule.DayOfMonth.Value) :
-
-        //        (rule.DayOfMonth.HasValue && rule.Month.HasValue) ?
-        //            Occur.OnEvery(rule.DayOfMonth.Value, rule.Month.Value) :
-
-        //        (rule.TimeUnit.HasValue) ?
-        //            Occur.OnEvery(rule.Ordinal, rule.TimeUnit.Value) :
-        //        null;
-
-        //    return rule.MapToNewRule(newRule);
-        //}
-
         private static IRule DecideAndAddOnEveryRule(RuleInfo rule)
         {
             IRule newRule;
