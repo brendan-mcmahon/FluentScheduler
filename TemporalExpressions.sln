@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpressionsTests", "UnitTests\ExpressionsTests.csproj", "{7A2936E7-FF23-4886-9CA1-2D404A4BA8C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpressionsTests", "ExpressionsTests\ExpressionsTests.csproj", "{7A2936E7-FF23-4886-9CA1-2D404A4BA8C9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemporalExpressions", "TemporalExpressions\TemporalExpressions.csproj", "{30DFC119-4D81-4E6D-80FB-C6B9579B4FEE}"
 EndProject
