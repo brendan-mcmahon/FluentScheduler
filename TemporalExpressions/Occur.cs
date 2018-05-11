@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TemporalExpressions.Rules;
 
 namespace TemporalExpressions
@@ -60,7 +61,6 @@ namespace TemporalExpressions
         public static IRule OnEvery(TimeUnit unit) => 
             OnEvery(1, unit);
 
-        //TODO: switch statement
         /// <summary>
         /// Evaluates to true on every Nth number of the given unit of time.</summary>
         /// <param name="ordinal"> The ordinal value for the expression (eg. the Nth number of the given unit, where N is ordinal). </param>
@@ -68,19 +68,17 @@ namespace TemporalExpressions
         /// <returns>IRule evaluating true on every Nth number of the given unit of time.</returns>
         public static IRule OnEvery(int ordinal, TimeUnit unit)
         {
-            switch (unit)
+            var dictionary = new Dictionary<TimeUnit, IRule>
             {
-                case TimeUnit.Days:
-                    return new EveryNthDay(ordinal);
-                case TimeUnit.Weeks:
-                    return new OnTheNthDayOfTheWeek(ordinal);
-                case TimeUnit.Months:
-                    return new EveryNthMonth(ordinal);
-                case TimeUnit.Years:
-                    return new EveryNthYear(ordinal);
-                default:
-                    throw new NotSupportedException();
-            }
+                {TimeUnit.Days, new EveryNthDay(ordinal) },
+                {TimeUnit.Weeks, new OnTheNthDayOfTheWeek(ordinal) },
+                {TimeUnit.Months, new EveryNthMonth(ordinal) },
+                {TimeUnit.Years, new EveryNthYear(ordinal) }
+            };
+
+            if (dictionary.ContainsKey(unit)) return dictionary[unit];
+
+            throw new NotSupportedException($"Rules for 'Every {ordinal} {unit}' is not currently supported.");
         }
 
         /// <summary>

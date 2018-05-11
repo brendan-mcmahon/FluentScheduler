@@ -1,13 +1,14 @@
-﻿using System;
+﻿using System.Runtime.CompilerServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TemporalDeserializer;
 
 namespace TemporalExpressions.Rules
 {
+    
     public abstract class RuleBase : IRule
     {
-        //TODO: Make setter internal
         /// <summary> Rules that are evaluated before this rule. </summary>
         public ICollection<IRule> Rules { get; set; }
         /// <summary> The Ordinal which can be applied as the Nth of any given rule. </summary>
