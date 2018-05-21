@@ -9,6 +9,8 @@ namespace ExpressionsTests
     {
         public Recurrence Recurrence;
         public DateTime StartDate = new DateTime(2018, 4, 1);
+        public DateTime EndDate = new DateTime(2018, 8, 1);
+
 
         [TestInitialize]
         public void Arrange()
@@ -35,6 +37,12 @@ namespace ExpressionsTests
         {
             ShouldBeFalse(new DateTime(year, month, date));
         }
+
+        public int Count(DateTime dateTime1, DateTime dateTime2)
+        {
+            return Recurrence.CountBetween(dateTime1, dateTime2);
+        }
+
 
     }
 }

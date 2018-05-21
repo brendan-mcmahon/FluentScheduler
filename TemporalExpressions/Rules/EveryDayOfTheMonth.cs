@@ -19,5 +19,17 @@ namespace TemporalExpressions.Rules
                 (date.MonthFollowsMonthWithLessThan31Days() && Day > 30) ||
                 (date.MonthIsMarch() && date.IsLeapYear() && Day > 29) ||
                 (date.MonthIsMarch() && Day > 28);
+
+        internal override int CountBetween(DateTime firstDate, DateTime endDate)
+        {
+            var totalMonths = endDate.TotalMonths() - firstDate.TotalMonths();
+            if (firstDate.Day > Day)
+                totalMonths--;
+            if (endDate.Day >= Day)
+                totalMonths++;
+
+            return totalMonths;
+        }
+
     }
 }

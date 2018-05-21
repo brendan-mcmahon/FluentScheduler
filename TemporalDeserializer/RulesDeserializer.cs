@@ -7,10 +7,10 @@ namespace TemporalDeserializer
     public static class RulesDeserializer
     {
         public static Recurrence Deserialize(string json) => 
-            new Recurrence(json.DeserializeObject().ToIRules());
+            new Recurrence(json.DeserializeToRuleInfos().ToIRules());
         
 
-        private static ICollection<RuleInfo> DeserializeObject(this string json) =>
+        private static ICollection<RuleInfo> DeserializeToRuleInfos(this string json) =>
             JsonConvert.DeserializeObject<ICollection<RuleInfo>>(json);
     }
 }

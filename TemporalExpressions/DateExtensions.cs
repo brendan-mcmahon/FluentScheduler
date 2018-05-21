@@ -16,5 +16,13 @@ namespace TemporalExpressions
 
         public static bool IsLeapYear(this DateTime date) =>
             date.Year % 4 == 0;
+
+        public static int TotalMonths(this DateTime date) =>
+            (date.Year * 12) + date.Month;
+
+        public static bool IsBetween(this DateTime date, DateTime dateOne, DateTime dateTwo)
+        {
+            return (date >= dateOne && date <= dateTwo);
+        }
     }
 }

@@ -8,12 +8,23 @@ namespace TemporalExpressions.Rules
         {
             Ordinal = ordinal;
         }
+        
+        internal override int CountBetween(DateTime firstDate, DateTime endDate)
+        {
+            var mod = DaysSinceLastInstance(firstDate);
+            var firstInstance = firstDate.AddDays(Ordinal - mod);
+
+            var count = (endDate - firstInstance).Days / Ordinal;
+            if (firstInstance <= endDate) count++;
+            
+            return count;
+        }
 
         internal override bool InnerEvaluation(DateTime date) =>
-            DaysBetweenStartAndDate(date) % Ordinal == 0;
+            DaysSinceLastInstance(date) == 0;
 
-        private int DaysBetweenStartAndDate(DateTime date) =>
-            (date - StartDate).Days;
-        
+        private int DaysSinceLastInstance(DateTime date) => 
+            ((date - StartDate).Days) % Ordinal;
+
     }
 }

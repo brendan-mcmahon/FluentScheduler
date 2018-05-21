@@ -29,7 +29,7 @@ namespace TemporalExpressions
         /// <param name="dayOfWeek"> The day of the week for the Reccurence to occur on </param>
         /// <returns>IRule evaluating true on the Nth instance of given DayOfWeek within a month.</returns>
         public static IRule OnThe(int ordinal, DayOfWeek dayOfWeek) => 
-            new OnTheNthDayOfTheWeek(ordinal, dayOfWeek);
+            new OnTheNthDayOfTheWeekInMonth(ordinal, dayOfWeek);
 
         /// <summary>
         /// Evaluates to true on every Nth instance of given DayOfWeek.</summary>
@@ -68,15 +68,15 @@ namespace TemporalExpressions
         /// <returns>IRule evaluating true on every Nth number of the given unit of time.</returns>
         public static IRule OnEvery(int ordinal, TimeUnit unit)
         {
-            var dictionary = new Dictionary<TimeUnit, IRule>
+            var dictionary = new Dictionary<TimeUnit, Func<IRule>>
             {
-                {TimeUnit.Days, new EveryNthDay(ordinal) },
-                {TimeUnit.Weeks, new OnTheNthDayOfTheWeek(ordinal) },
-                {TimeUnit.Months, new EveryNthMonth(ordinal) },
-                {TimeUnit.Years, new EveryNthYear(ordinal) }
+                {TimeUnit.Days, () => new EveryNthDay(ordinal) },
+                {TimeUnit.Weeks, () => new OnTheNthDayOfTheWeekInMonth(ordinal) },
+                {TimeUnit.Months, () => new EveryNthMonth(ordinal) },
+                {TimeUnit.Years, () => new EveryNthYear(ordinal) }
             };
 
-            if (dictionary.ContainsKey(unit)) return dictionary[unit];
+            if (dictionary.ContainsKey(unit)) return dictionary[unit].Invoke();
 
             throw new NotSupportedException($"Rules for 'Every {ordinal} {unit}' is not currently supported.");
         }

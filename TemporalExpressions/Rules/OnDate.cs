@@ -9,6 +9,9 @@ namespace TemporalExpressions.Rules
         public OnDate(DateTime date) => 
             _date = date;
 
+        internal override int CountBetween(DateTime firstDate, DateTime endDate) =>
+            (_date.IsBetween(firstDate, endDate)) ? 1 : 0;
+
         internal override bool InnerEvaluation(DateTime date) =>
             date == _date;
     }

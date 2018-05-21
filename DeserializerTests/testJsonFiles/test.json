@@ -3,17 +3,17 @@
     "RecurrenceType": "OnEvery",
     "DayOfWeek": "Tuesday",
     "Ordinal": 1,
-    "StartDate":  "2018-5-1"
+    "StartDate": "2018-5-1"
   },
 
   {
     "RecurrenceType": "OnEvery",
-    "DayOfMonth": 15,
+    "Ordinal": 2,
+    "TimeUnit": "Months",  
     "Rules": [
       {
         "RecurrenceType": "OnEvery",
-        "Ordinal": 2,
-        "TimeUnit": "Months"
+        "DayOfMonth": 15
       }
     ],
     "StartDate": "2018-5-1"

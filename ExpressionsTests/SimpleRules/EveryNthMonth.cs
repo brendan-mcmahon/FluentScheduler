@@ -9,7 +9,7 @@ namespace ExpressionsTests.SimpleRules
         [TestMethod]
         public void ShouldOccur_EveryMonth()
         {
-            Recurrence.AddRule(Occur.OnEvery(TimeUnit.Months).StartingOn(StartDate));
+            Recurrence.AddRule(Occur.OnEvery(TimeUnit.Months).OnThe(1).StartingOn(StartDate));
 
             ShouldBeTrue(StartDate);
             ShouldBeTrue(StartDate.AddMonths(1));
@@ -25,9 +25,9 @@ namespace ExpressionsTests.SimpleRules
         }
 
         [TestMethod]
-        public void ShouldOccur_EveryOtherDay()
+        public void ShouldOccur_EveryOtherMonth()
         {
-            Recurrence.AddRule(Occur.OnEvery(2, TimeUnit.Months).StartingOn(StartDate));
+            Recurrence.AddRule(Occur.OnEvery(2, TimeUnit.Months).OnThe(1).StartingOn(StartDate));
 
             ShouldBeTrue(StartDate);
             ShouldBeFalse(StartDate.AddMonths(1));
@@ -43,9 +43,9 @@ namespace ExpressionsTests.SimpleRules
         }
 
         [TestMethod]
-        public void ShouldOccur_EveryThirdDay()
+        public void ShouldOccur_EveryThirdMonth()
         {
-            Recurrence.AddRule(Occur.OnEvery(3, TimeUnit.Months).StartingOn(StartDate));
+            Recurrence.AddRule(Occur.OnEvery(3, TimeUnit.Months).OnThe(1).StartingOn(StartDate));
 
             ShouldBeTrue(StartDate);
             ShouldBeFalse(StartDate.AddMonths(1));

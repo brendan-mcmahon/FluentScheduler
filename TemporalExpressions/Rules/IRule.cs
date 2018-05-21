@@ -20,5 +20,6 @@ namespace TemporalExpressions.Rules
         IRule OnThe(int dayOfMonth, Month month);
 
         bool Evaluate(DateTime date);
+        int TotalCountBetween(DateTime firstDate, DateTime endDate);
     }
 }

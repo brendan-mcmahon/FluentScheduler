@@ -33,5 +33,23 @@ namespace TemporalExpressions.Rules
             var difference = Math.Abs(DayOfWeek - (StartDate.DayOfWeek + 7));
             return StartDate.AddDays(-difference);
         }
+
+        private DateTime NextInstanceOfDayOfWeek(DateTime date)
+        {
+            if (date.DayOfWeek == DayOfWeek) return date;
+
+            var difference = Math.Abs(DayOfWeek - (date.DayOfWeek));
+            return date.AddDays(difference);
+        }
+
+        internal override int CountBetween(DateTime firstDate, DateTime endDate)
+        {
+            var count = 0;
+            var nextInstance = NextInstanceOfDayOfWeek(firstDate);
+            if (nextInstance < endDate) count++;
+            count += ((endDate - nextInstance).Days / 7);
+
+            return count;
+        }
     }
 }

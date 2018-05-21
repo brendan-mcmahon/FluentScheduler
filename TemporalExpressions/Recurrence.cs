@@ -54,5 +54,15 @@ namespace TemporalExpressions
 
             return false;
         }
+
+        public int CountBetween(DateTime startDate, DateTime endDate)
+        {
+            var count = 0;
+            foreach(var rule in Rules)
+            {
+                count += rule.TotalCountBetween(startDate, endDate);
+            }
+            return count;
+        }
     }
 }

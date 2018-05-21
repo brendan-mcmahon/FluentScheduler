@@ -1,14 +1,14 @@
-﻿using System.Runtime.CompilerServices;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using TemporalDeserializer;
 
 namespace TemporalExpressions.Rules
 {
-    
+
     public abstract class RuleBase : IRule
     {
+        #region Properties
         /// <summary> Rules that are evaluated before this rule. </summary>
         public ICollection<IRule> Rules { get; set; }
         /// <summary> The Ordinal which can be applied as the Nth of any given rule. </summary>
@@ -22,6 +22,9 @@ namespace TemporalExpressions.Rules
         /// <summary> When set to true, this rule's evaluation result will be inverted. (ie. if the date evaluates true, the result will be false, and vice versa) </summary>
         public bool InvertEvaluation { get; set; }
 
+        #endregion
+
+        #region Constructors
         protected RuleBase() : this(DateTime.Today) { }
 
         protected RuleBase(DateTime startDate)
@@ -29,6 +32,10 @@ namespace TemporalExpressions.Rules
             StartDate = startDate;
             Rules = new List<IRule>();
         }
+
+        #endregion
+
+        #region Modifiers
 
         /// <summary> Sets the StartDate on this rule, as well as any subrules. </summary>
         /// <param name="date">The date to set the StartDate to. </param>
@@ -82,6 +89,16 @@ namespace TemporalExpressions.Rules
             return this;
         }
 
+        /// <summary>
+        /// Adds a sub-rule to the Rule. </summary>
+        /// <param name="rule"> The rule to be added to the rules collection. </param>
+        /// <returns>This Rule with the new sub-rule. </returns>
+        public void AddRule(IRule rule) =>
+            Rules.Add(rule);
+        #endregion
+
+        #region Evaluation
+
         /// <summary> Evaluates whether a given date occurs according to the collection of rules, the range, and whether or not the evaluation is inverted or not. </summary>
         /// <param name="date"> The date to evaluate. </param>
         /// <returns> True if the date occurs according to the rules, otherwise false. </returns>
@@ -104,11 +121,30 @@ namespace TemporalExpressions.Rules
         private bool FullEvaluation(DateTime date) =>
             (EvaluateChain(date) && IsWithinRange(date)) && InnerEvaluation(date);
 
-        /// <summary>
-        /// Adds a sub-rule to the Rule. </summary>
-        /// <param name="rule"> The rule to be added to the rules collection. </param>
-        /// <returns>This Rule with the new sub-rule. </returns>
-        public void AddRule(IRule rule) => 
-            Rules.Add(rule);
+        #endregion
+
+        #region Count
+
+        public int TotalCountBetween(DateTime firstDate, DateTime endDate)
+        {
+            var totalCount = CountBetween(firstDate, endDate) - CountOutOfRange(firstDate, endDate);
+
+            return totalCount;
+        }
+
+        private int CountOutOfRange(DateTime firstDate, DateTime endDate)
+        {
+            var count = 0;
+            if (firstDate < StartDate) count += CountBetween(firstDate, StartDate);
+            if (EndDate.HasValue && endDate > EndDate.Value) count += CountBetween(EndDate.Value, endDate);
+            return count;
+        }
+
+        internal abstract int CountBetween(DateTime firstDate, DateTime endDate);
+
+        internal int CountBetween(DateTime endDate) =>
+            CountBetween(DateTime.Today, endDate);
+
+        #endregion
     }
 }

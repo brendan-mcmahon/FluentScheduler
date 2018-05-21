@@ -9,6 +9,11 @@ namespace TemporalExpressions.Rules
             Ordinal = ordinal;
         }
 
+        internal override int CountBetween(DateTime firstDate, DateTime endDate)
+        {
+            throw new NotImplementedException();
+        }
+
         internal override bool InnerEvaluation(DateTime date) =>
             (YearsBetweenStartAndDate(date) % Ordinal == 0);
 
