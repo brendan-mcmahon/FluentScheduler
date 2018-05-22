@@ -55,12 +55,22 @@ namespace TemporalExpressions
             return false;
         }
 
-        public int CountBetween(DateTime startDate, DateTime endDate)
+        //public int CountBetween(DateTime startDate, DateTime endDate)
+        //{
+        //    var count = 0;
+        //    foreach(var rule in Rules)
+        //    {
+        //        count += rule.TotalCountBetween(startDate, endDate);
+        //    }
+        //    return count;
+        //}
+
+        public int CountBetween(DateTime date1, DateTime date2)
         {
             var count = 0;
             foreach(var rule in Rules)
             {
-                count += rule.TotalCountBetween(startDate, endDate);
+                count += rule.CountAll(date1, date2).Count();
             }
             return count;
         }

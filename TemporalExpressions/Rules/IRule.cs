@@ -21,5 +21,6 @@ namespace TemporalExpressions.Rules
 
         bool Evaluate(DateTime date);
         int TotalCountBetween(DateTime firstDate, DateTime endDate);
+        IEnumerable<DateTime> CountAll(DateTime date1, DateTime date2);
     }
 }

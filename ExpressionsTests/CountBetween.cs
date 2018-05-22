@@ -165,25 +165,5 @@ namespace ExpressionsTests
             var months = Recurrence.CountBetween(new DateTime(2017, 10, 1), new DateTime(2017, 12, 1));
             var weeks = 1;
         }
-
-        public void Algorithm()
-        {
-            //Rule.CountAll(date1, date2){
-            //    var lists = List<List<DateTime>>();
-
-            //    //Gather all dates from inner rules
-            //    foreach (var rule in Rules)
-            //    {
-            //        lists.Add(rule.CountAll(date1, date2));
-            //    }
-
-            //    //put all of the dates into one list and select only duplicated dates
-            //    return lists
-            //     .SelectMany(i => i) //flattens list
-            //     .GroupBy(x => x) // groups by date
-            //     .Where(g => g.Count() > 1) //cuts down to only duplicated dates
-            //     .Select(g => g.Key); //selects one instance of each date
-            //}
-        }
     }
 }

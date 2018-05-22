@@ -146,5 +146,27 @@ namespace TemporalExpressions.Rules
             CountBetween(DateTime.Today, endDate);
 
         #endregion
+
+        #region NewCount
+
+        public IEnumerable<DateTime> CountAll(DateTime date1, DateTime date2)
+        {
+            var lists = new List<List<DateTime>>();
+            Rules.ForEach(r => lists.Add(r.CountAll(date1, date2).ToList()));
+
+            lists.Add(InnerCount(date1, date2));
+
+            return lists
+                .SelectMany(l => l)         //flattens list
+                .GroupBy(g => g)            //groups by date
+                //.Where(g => g.Count() > 1)  //cuts down to only duplicated dates
+                .Where(g => InnerEvaluation(g.Key))
+                .Select(d => d.Key);        //selects one instance of each date
+        }
+
+        internal abstract bool CountEvaluator(DateTime key);
+        public abstract List<DateTime> InnerCount(DateTime date1, DateTime date2);
+
+        #endregion
     }
 }

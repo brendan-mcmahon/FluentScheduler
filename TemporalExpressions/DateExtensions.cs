@@ -20,9 +20,11 @@ namespace TemporalExpressions
         public static int TotalMonths(this DateTime date) =>
             (date.Year * 12) + date.Month;
 
-        public static bool IsBetween(this DateTime date, DateTime dateOne, DateTime dateTwo)
-        {
-            return (date >= dateOne && date <= dateTwo);
-        }
+        public static bool IsBetween(this DateTime date, DateTime dateOne, DateTime dateTwo) => 
+            (date >= dateOne && date <= dateTwo);
+
+        public static int TotalMonthsBetween(DateTime firstDate, DateTime endDate) => 
+            Math.Abs(endDate.TotalMonths() - firstDate.TotalMonths());
+
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using static TemporalExpressions.DateExtensions;
 
 namespace TemporalExpressions.Rules
 {
@@ -17,14 +19,14 @@ namespace TemporalExpressions.Rules
             var mod = MonthsSinceLastInstance(firstDate);
             var firstInstance = firstDate.AddMonths(Ordinal - mod);
 
-            var count = MonthsBetween(firstInstance, endDate) / Ordinal;
+            var count = TotalMonthsBetween(firstInstance, endDate) / Ordinal;
             if (firstInstance <= endDate) count++;
 
             return count;
         }
 
         private int MonthsSinceLastInstance(DateTime date) =>
-            (MonthsBetween(StartDate, date)) % Ordinal;
+            (TotalMonthsBetween(StartDate, date)) % Ordinal;
 
 
         internal override bool InnerEvaluation(DateTime date)
@@ -40,14 +42,35 @@ namespace TemporalExpressions.Rules
         }
 
         private int MonthsBetweenStartAndDate(DateTime date) => 
-            MonthsBetween(StartDate, date);
+            TotalMonthsBetween(StartDate, date);
 
-        private int MonthsBetween(DateTime dateOne, DateTime dateTwo)
+        public override List<DateTime> InnerCount(DateTime date1, DateTime date2)
         {
-            var startMonths = (dateOne.Month + (dateOne.Year * 12));
-            var endMonths = (dateTwo.Month + (dateTwo.Year * 12));
+            var list = new List<DateTime>();
+            var currentDate = FindFirstInstance(date1);
+            while (currentDate < date2)
+            {
+                list.AddRange(DatesInMonth(currentDate));
+                currentDate.AddMonths(Ordinal);
+                currentDate = new DateTime(currentDate.Year, currentDate.Month, 1);
+            }
 
-            return Math.Abs(startMonths - endMonths);
+            return list;
+        }
+
+        private static List<DateTime> DatesInMonth(DateTime date) => Enumerable.Range(date.Day, DateTime.DaysInMonth(date.Year, date.Month))
+                             .Select(day => new DateTime(date.Year, date.Month, day))
+                             .ToList();
+
+        private DateTime FindFirstInstance(DateTime date1)
+        {
+            var difference = TotalMonthsBetween(date1, StartDate);
+            return StartDate.AddMonths(difference + (difference % Ordinal));
+        }
+
+        internal override bool CountEvaluator(DateTime date)
+        {
+            return InnerEvaluation(date);
         }
     }
 }
