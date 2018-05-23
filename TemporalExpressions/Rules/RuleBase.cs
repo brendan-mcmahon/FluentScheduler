@@ -6,7 +6,7 @@ using TemporalDeserializer;
 
 namespace TemporalExpressions.Rules
 {
-    
+    #region Properties
     public abstract class RuleBase : IRule
     {
         /// <summary> Rules that are evaluated before this rule. </summary>
@@ -21,7 +21,9 @@ namespace TemporalExpressions.Rules
         public bool OverrideIfEvaluationFails { get; set; }
         /// <summary> When set to true, this rule's evaluation result will be inverted. (ie. if the date evaluates true, the result will be false, and vice versa) </summary>
         public bool InvertEvaluation { get; set; }
+        #endregion
 
+        #region Constructors
         protected RuleBase() : this(DateTime.Today) { }
 
         protected RuleBase(DateTime startDate)
@@ -29,7 +31,9 @@ namespace TemporalExpressions.Rules
             StartDate = startDate;
             Rules = new List<IRule>();
         }
+        #endregion
 
+        #region Modifiers
         /// <summary> Sets the StartDate on this rule, as well as any subrules. </summary>
         /// <param name="date">The date to set the StartDate to. </param>
         /// <returns> This IRule </returns>
@@ -82,6 +86,16 @@ namespace TemporalExpressions.Rules
             return this;
         }
 
+        /// <summary>
+        /// Adds a sub-rule to the Rule. </summary>
+        /// <param name="rule"> The rule to be added to the rules collection. </param>
+        /// <returns>This Rule with the new sub-rule. </returns>
+        public void AddRule(IRule rule) =>
+            Rules.Add(rule);
+
+        #endregion
+
+        #region Evaluation
         /// <summary> Evaluates whether a given date occurs according to the collection of rules, the range, and whether or not the evaluation is inverted or not. </summary>
         /// <param name="date"> The date to evaluate. </param>
         /// <returns> True if the date occurs according to the rules, otherwise false. </returns>
@@ -103,12 +117,17 @@ namespace TemporalExpressions.Rules
 
         private bool FullEvaluation(DateTime date) =>
             (EvaluateChain(date) && IsWithinRange(date)) && InnerEvaluation(date);
+        #endregion
 
-        /// <summary>
-        /// Adds a sub-rule to the Rule. </summary>
-        /// <param name="rule"> The rule to be added to the rules collection. </param>
-        /// <returns>This Rule with the new sub-rule. </returns>
-        public void AddRule(IRule rule) => 
-            Rules.Add(rule);
+        public int Count(DateTime date1, DateTime date2)
+        {
+            var allDays = GetDaysBetweenDates(date1, date2);
+
+            return allDays.Where(d => Evaluate(d)).Count();
+        }
+
+        private List<DateTime> GetDaysBetweenDates(DateTime date1, DateTime date2) =>
+            Enumerable.Range(0, (date2 - date1).Days + 1)
+                     .Select(d => date1.AddDays(d)).ToList();
     }
 }

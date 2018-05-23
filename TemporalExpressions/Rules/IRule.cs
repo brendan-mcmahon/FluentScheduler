@@ -20,5 +20,6 @@ namespace TemporalExpressions.Rules
         IRule OnThe(int dayOfMonth, Month month);
 
         bool Evaluate(DateTime date);
+        int Count(DateTime date1, DateTime date2);
     }
 }

@@ -54,5 +54,15 @@ namespace TemporalExpressions
 
             return false;
         }
+
+        public int Count(DateTime date1, DateTime date2)
+        {
+            var count = 0;
+            foreach(var rule in Rules)
+            {
+                count += rule.Count(date1, date2);
+            }
+            return count;
+        }
     }
 }
