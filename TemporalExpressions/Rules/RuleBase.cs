@@ -1,14 +1,13 @@
-﻿using System.Runtime.CompilerServices;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using TemporalDeserializer;
 
 namespace TemporalExpressions.Rules
 {
-    #region Properties
     public abstract class RuleBase : IRule
     {
+        #region Properties
         /// <summary> Rules that are evaluated before this rule. </summary>
         public ICollection<IRule> Rules { get; set; }
         /// <summary> The Ordinal which can be applied as the Nth of any given rule. </summary>
@@ -119,6 +118,7 @@ namespace TemporalExpressions.Rules
             (EvaluateChain(date) && IsWithinRange(date)) && InnerEvaluation(date);
         #endregion
 
+        #region Count
         public int Count(DateTime date1, DateTime date2)
         {
             var allDays = GetDaysBetweenDates(date1, date2);
@@ -129,5 +129,6 @@ namespace TemporalExpressions.Rules
         private List<DateTime> GetDaysBetweenDates(DateTime date1, DateTime date2) =>
             Enumerable.Range(0, (date2 - date1).Days + 1)
                      .Select(d => date1.AddDays(d)).ToList();
+        #endregion
     }
 }

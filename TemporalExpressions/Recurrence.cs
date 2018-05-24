@@ -11,10 +11,8 @@ namespace TemporalExpressions
     public class Recurrence
     {
         public Recurrence() : this(new List<IRule>()) { }
-        public Recurrence(ICollection<IRule> rules)
-        {
+        public Recurrence(ICollection<IRule> rules) => 
             Rules = rules;
-        }
 
         public ICollection<IRule> Rules { get; set; }
 

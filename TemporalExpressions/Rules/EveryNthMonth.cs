@@ -4,10 +4,8 @@ namespace TemporalExpressions.Rules
 {
     public class EveryNthMonth : RuleBase
     {
-        public EveryNthMonth(int ordinal)
-        {
+        public EveryNthMonth(int ordinal) => 
             Ordinal = ordinal;
-        }
 
         internal override bool InnerEvaluation(DateTime date) =>
             (MonthsBetweenStartAndDate(date) % Ordinal == 0);

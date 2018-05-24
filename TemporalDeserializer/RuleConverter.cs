@@ -13,17 +13,17 @@ namespace TemporalDeserializer
 
         private static IRule Resolve(RuleInfo rule)
         {
-            var dictionary = new Dictionary<RecurrenceType, Func<RuleInfo, IRule>>{
-                { RecurrenceType.On, r => r.MapToNewRule(Occur.On(r.Date.Value)) },
+            var typeResolver = new Dictionary<RecurrenceType, Func<RuleInfo, IRule>>{
+                { RecurrenceType.On, r => r.MapInfoToRule(Occur.On(r.Date.Value)) },
                 { RecurrenceType.OnEvery, DecideAndAddOnEveryRule },
-                { RecurrenceType.OnThe, r => r.MapToNewRule(Occur.OnThe(r.Ordinal, r.DayOfWeek.Value)) },
-                { RecurrenceType.Not, r => r.MapToNewRule(Occur.Not(r.Rules.ToIRules().FirstOrDefault())) }
+                { RecurrenceType.OnThe, r => r.MapInfoToRule(Occur.OnThe(r.Ordinal, r.DayOfWeek.Value)) },
+                { RecurrenceType.Not, r => r.MapInfoToRule(Occur.Not(r.Rules.ToIRules().FirstOrDefault())) }
             };
 
-            return dictionary[rule.RecurrenceType].Invoke(rule);
+            return typeResolver[rule.RecurrenceType](rule);
         }
 
-        private static IRule MapToNewRule(this RuleInfo rule, IRule newRule)
+        private static IRule MapInfoToRule(this RuleInfo rule, IRule newRule)
         {
             newRule.Rules = rule.Rules.ToIRules();
             newRule.StartingOn(rule.StartDate);
@@ -50,7 +50,7 @@ namespace TemporalDeserializer
             else
                 throw new NotSupportedException($"The Recurrence type is {nameof(rule.RecurrenceType)} but is missing one or more valid parameter.");
 
-            return rule.MapToNewRule(newRule);
+            return rule.MapInfoToRule(newRule);
         }
     }
 }

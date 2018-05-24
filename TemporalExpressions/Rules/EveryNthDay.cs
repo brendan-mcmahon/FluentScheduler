@@ -4,10 +4,8 @@ namespace TemporalExpressions.Rules
 {
     public class EveryNthDay : RuleBase
     {
-        public EveryNthDay(int ordinal)
-        {
+        public EveryNthDay(int ordinal) => 
             Ordinal = ordinal;
-        }
 
         internal override bool InnerEvaluation(DateTime date) =>
             DaysBetweenStartAndDate(date) % Ordinal == 0;
