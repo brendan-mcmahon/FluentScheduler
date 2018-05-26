@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TemporalDeserializer
+namespace Common
 {
     public static class Extensions
     {
