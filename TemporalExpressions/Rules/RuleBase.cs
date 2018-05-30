@@ -126,9 +126,13 @@ namespace TemporalExpressions.Rules
             return allDays.Where(d => Evaluate(d)).Count();
         }
 
-        private List<DateTime> GetDaysBetweenDates(DateTime date1, DateTime date2) =>
-            Enumerable.Range(0, (date2 - date1).Days + 1)
-                     .Select(d => date1.AddDays(d)).ToList();
+        private List<DateTime> GetDaysBetweenDates(DateTime date1, DateTime date2)
+        {
+            var later = (date1 >= date2) ? date1 : date2;
+            var earlier = (date1 < date2) ? date1 : date2;
+            return Enumerable.Range(0, (later - earlier).Days + 1)
+                     .Select(d => earlier.AddDays(d)).ToList();
+        }
         #endregion
     }
 }
