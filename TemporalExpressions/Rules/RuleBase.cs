@@ -134,5 +134,7 @@ namespace TemporalExpressions.Rules
                      .Select(d => earlier.AddDays(d)).ToList();
         }
         #endregion
+
+        public abstract override string ToString();
     }
 }

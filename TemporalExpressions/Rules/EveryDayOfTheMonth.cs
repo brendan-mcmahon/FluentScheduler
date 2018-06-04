@@ -19,5 +19,8 @@ namespace TemporalExpressions.Rules
                 (date.MonthFollowsMonthWithLessThan31Days() && Day > 30) ||
                 (date.MonthIsMarch() && date.IsLeapYear() && Day > 29) ||
                 (date.MonthIsMarch() && Day > 28);
+
+        public override string ToString() =>
+            $"on every {((Ordinal > 1) ? Ordinal.ToOrdinal() : null)} {Day}";
     }
 }

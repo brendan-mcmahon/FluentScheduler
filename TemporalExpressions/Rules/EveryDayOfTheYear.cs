@@ -16,5 +16,8 @@ namespace TemporalExpressions.Rules
         internal override bool InnerEvaluation(DateTime date) =>
             date.Day == Day && date.Month == (int) Month ||
             date.Day == 1 && date.Month == (int) Month.March;
+
+        public override string ToString() =>
+            $"on every {((Ordinal > 1) ? Ordinal.ToOrdinal() : null)} {Month} {Day.ToOrdinal()}";
     }
 }

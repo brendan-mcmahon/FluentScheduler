@@ -17,5 +17,8 @@ namespace TemporalExpressions.Rules
 
             return (startMonths - endMonths);
         }
+
+        public override string ToString() =>
+            $"on every {Ordinal.ToOrdinal()} month";
     }
 }

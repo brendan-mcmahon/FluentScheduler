@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 
 namespace TemporalExpressions.Rules
 {
@@ -12,5 +13,11 @@ namespace TemporalExpressions.Rules
 
         private int YearsBetweenStartAndDate(DateTime date) =>
             (StartDate.Year - date.Year);
+
+        public override string ToString()
+        {
+            var subRules = Rules.ResolveToNewList(r => r.ToString());
+            return $"on every {Ordinal.ToOrdinal()} year {subRules.ListToString()}";
+        }
     }
 }

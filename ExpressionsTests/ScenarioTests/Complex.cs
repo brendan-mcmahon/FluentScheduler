@@ -98,5 +98,18 @@ namespace ExpressionsTests.ScenarioTests
             ShouldBeFalse(2018, 4, 5);
             ShouldBeFalse(2018, 4, 11);
         }
+
+        [TestMethod]
+        public void ToStringTest()
+        {
+            Recurrence
+                .AddRule(Occur.OnEvery(2, DayOfWeek.Saturday).StartingOn(StartDate))
+                .And(Occur.OnEvery(2, DayOfWeek.Sunday).StartingOn(StartDate))
+                .And(Occur.OnEvery(DayOfWeek.Wednesday).StartingOn(StartDate))
+                .And(Occur.OnEvery(1, TimeUnit.Years).OnThe(24, Month.December))
+                .And(Occur.Not(Occur.OnEvery(1, TimeUnit.Years).OnThe(25, Month.December)));
+
+            Console.WriteLine(Recurrence);
+        }
     }
 }

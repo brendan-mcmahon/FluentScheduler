@@ -2,8 +2,20 @@
   {
     "RecurrenceType": "OnEvery",
     "DayOfWeek": "Tuesday",
+    "DayOfMonthOrdinal":  "first",
+    "DayOfMonth": 15,
     "Ordinal": 1,
-    "StartDate":  "2018-5-1"
+    "StartDate": "2018-5-1",
+    "Rules": [
+      //...
+    ],
+    "EndDate":  "2018, 12, 1",
+  },
+  {
+    "RecurrenceType": "OnEvery",
+    "DayOfWeek": "Tuesday",
+    "Ordinal": 1,
+    "StartDate": "2018-5-1"
   },
 
   {

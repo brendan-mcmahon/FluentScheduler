@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TemporalExpressions.Rules;
@@ -61,6 +62,14 @@ namespace TemporalExpressions
                 count += rule.Count(date1, date2);
             }
             return count;
+        }
+
+        public override string ToString()
+        {
+            var allStrings = Rules.ResolveToNewList(r =>
+                (r.InvertEvaluation) ? "not " + r.ToString() : r.ToString());
+
+            return String.Join(", and ", allStrings);
         }
     }
 }

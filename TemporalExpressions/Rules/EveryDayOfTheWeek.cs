@@ -16,7 +16,7 @@ namespace TemporalExpressions.Rules
 
         internal override bool InnerEvaluation(DateTime date) =>
             date.DayOfWeek == DayOfWeek && IsDivisibleByOrdinal(date);
-        
+
 
         private bool IsDivisibleByOrdinal(DateTime date)
         {
@@ -33,5 +33,8 @@ namespace TemporalExpressions.Rules
             var difference = Math.Abs(DayOfWeek - (StartDate.DayOfWeek + 7));
             return StartDate.AddDays(-difference);
         }
+
+        public override string ToString() =>
+            $"on every {((Ordinal > 1) ? Ordinal.ToOrdinal() : null)} {DayOfWeek}";
     }
 }

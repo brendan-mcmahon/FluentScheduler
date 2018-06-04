@@ -11,5 +11,8 @@ namespace TemporalExpressions.Rules
 
         internal override bool InnerEvaluation(DateTime date) =>
             date == _date;
+
+        public override string ToString() =>
+            $"on {_date.ToString("MMMM dd, yyyy")}";
     }
 }

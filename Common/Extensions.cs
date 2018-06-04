@@ -21,5 +21,10 @@ namespace Common
 
             return list;
         }
+
+        public static string ListToString(this ICollection<string> list, string delimeter = null)
+        {
+            return String.Join((delimeter ?? ", "), list);
+        }
     }
 }

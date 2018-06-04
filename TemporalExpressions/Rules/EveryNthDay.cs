@@ -12,6 +12,9 @@ namespace TemporalExpressions.Rules
 
         private int DaysBetweenStartAndDate(DateTime date) =>
             (date - StartDate).Days;
-        
+
+        public override string ToString() =>
+            $"on every {Ordinal.ToOrdinal()} day";
+
     }
 }

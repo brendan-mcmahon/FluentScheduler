@@ -21,5 +21,6 @@ namespace TemporalExpressions.Rules
 
         bool Evaluate(DateTime date);
         int Count(DateTime date1, DateTime date2);
+        string ToString();
     }
 }
