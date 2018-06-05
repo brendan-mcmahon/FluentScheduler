@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 
 namespace TemporalExpressions.Rules
 {
@@ -35,6 +36,6 @@ namespace TemporalExpressions.Rules
         }
 
         public override string ToString() =>
-            $"on every {((Ordinal > 1) ? Ordinal.ToOrdinal() : null)} {DayOfWeek}";
+            $"on every {Ordinal.ToOrdinal()} {DayOfWeek}{SubRulesString()}";
     }
 }

@@ -19,7 +19,7 @@ namespace TemporalExpressions
 
         public static string ToOrdinal(this int n)
         {
-            if (n == 1) return "";
+            if (n == 1 || n == 0) return "";
             else if (n == 2) return "other";
             else if (n == 3) return "3rd";
             else return $"{n}th";

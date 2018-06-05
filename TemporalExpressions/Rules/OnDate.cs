@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Common;
+using System;
+using System.Linq;
 
 namespace TemporalExpressions.Rules
 {
@@ -6,13 +8,13 @@ namespace TemporalExpressions.Rules
     {
         private readonly DateTime _date;
 
-        public OnDate(DateTime date) => 
+        public OnDate(DateTime date) =>
             _date = date;
 
         internal override bool InnerEvaluation(DateTime date) =>
             date == _date;
 
         public override string ToString() =>
-            $"on {_date.ToString("MMMM dd, yyyy")}";
+            $"on {_date.ToString("MMMM dd, yyyy")}{SubRulesString()}";
     }
 }

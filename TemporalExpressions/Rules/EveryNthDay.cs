@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 
 namespace TemporalExpressions.Rules
 {
@@ -14,7 +15,7 @@ namespace TemporalExpressions.Rules
             (date - StartDate).Days;
 
         public override string ToString() =>
-            $"on every {Ordinal.ToOrdinal()} day";
+            $"on every {Ordinal.ToOrdinal()} day{SubRulesString()}";
 
     }
 }

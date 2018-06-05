@@ -107,7 +107,9 @@ namespace ExpressionsTests.ScenarioTests
                 .And(Occur.OnEvery(2, DayOfWeek.Sunday).StartingOn(StartDate))
                 .And(Occur.OnEvery(DayOfWeek.Wednesday).StartingOn(StartDate))
                 .And(Occur.OnEvery(1, TimeUnit.Years).OnThe(24, Month.December))
-                .And(Occur.Not(Occur.OnEvery(1, TimeUnit.Years).OnThe(25, Month.December)));
+                .And(Occur.Not(Occur.OnEvery(1, TimeUnit.Years).OnThe(25, Month.December)))
+                .And(Occur.OnEvery(2, TimeUnit.Months).OnThe(3, DayOfWeek.Thursday))
+                .And(Occur.On(new DateTime(2018, 5, 14)));
 
             Console.WriteLine(Recurrence);
         }

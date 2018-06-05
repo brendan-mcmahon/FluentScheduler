@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 
 namespace TemporalExpressions.Rules
 {
@@ -18,6 +19,6 @@ namespace TemporalExpressions.Rules
             date.Day == 1 && date.Month == (int) Month.March;
 
         public override string ToString() =>
-            $"on every {((Ordinal > 1) ? Ordinal.ToOrdinal() : null)} {Month} {Day.ToOrdinal()}";
+            $"on every {Ordinal.ToOrdinal()} {Month} {Day.ToOrdinal()}{SubRulesString()}";
     }
 }

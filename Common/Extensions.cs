@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Common
 {
@@ -25,6 +27,37 @@ namespace Common
         public static string ListToString(this ICollection<string> list, string delimeter = null)
         {
             return String.Join((delimeter ?? ", "), list);
+        }
+
+        public static string Prettify(this string message)
+        {
+            message = Regex.Replace(message, @"\s+", " ");
+            message = message.CapitalizeFirst();
+
+            return message;
+        }
+
+        public static string CapitalizeFirst(this string s)
+        {
+            bool isNewSentence = true;
+            var result = new StringBuilder(s.Length);
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (isNewSentence && char.IsLetter(s[i]))
+                {
+                    result.Append(char.ToUpper(s[i]));
+                    isNewSentence = false;
+                }
+                else
+                    result.Append(s[i]);
+
+                if (s[i] == '!' || s[i] == '?' || s[i] == '.')
+                {
+                    isNewSentence = true;
+                }
+            }
+
+            return result.ToString();
         }
     }
 }

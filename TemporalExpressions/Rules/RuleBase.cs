@@ -136,5 +136,12 @@ namespace TemporalExpressions.Rules
         #endregion
 
         public abstract override string ToString();
+
+        internal string SubRulesString()
+        {
+            if (Rules.Any())
+                return $", { Rules.ResolveToNewList(r => r.ToString())}";
+            return "";
+        }
     }
 }

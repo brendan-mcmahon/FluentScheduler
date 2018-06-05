@@ -69,7 +69,7 @@ namespace TemporalExpressions
             var allStrings = Rules.ResolveToNewList(r =>
                 (r.InvertEvaluation) ? "not " + r.ToString() : r.ToString());
 
-            return String.Join(", and ", allStrings);
+            return $"Occurs {String.Join(". ", allStrings)}".Prettify();
         }
     }
 }

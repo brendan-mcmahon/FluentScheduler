@@ -17,7 +17,12 @@ namespace TemporalExpressions.Rules
         public override string ToString()
         {
             var subRules = Rules.ResolveToNewList(r => r.ToString());
-            return $"on every {Ordinal.ToOrdinal()} year {subRules.ListToString()}";
+            var plural = Ordinal > 1;
+            if (plural)
+            {
+                return $"on every {Ordinal} years {subRules.ListToString()}";
+            }
+            return $"{subRules.ListToString()}";
         }
     }
 }
