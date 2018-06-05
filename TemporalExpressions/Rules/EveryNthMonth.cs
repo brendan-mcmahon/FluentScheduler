@@ -1,11 +1,12 @@
 ﻿using Common;
 using System;
+using System.Linq;
 
 namespace TemporalExpressions.Rules
 {
     public class EveryNthMonth : RuleBase
     {
-        public EveryNthMonth(int ordinal) => 
+        public EveryNthMonth(int ordinal) =>
             Ordinal = ordinal;
 
         internal override bool InnerEvaluation(DateTime date) =>
@@ -21,14 +22,23 @@ namespace TemporalExpressions.Rules
 
         public override string ToString()
         {
-            var subRules = Rules.ResolveToNewList(r => r.ToString()).ListToString();
-            var plural = Ordinal > 1;
-            if (plural)
+            var onTheRule = Rules.SingleOrDefault(r => r.GetType() == typeof(EveryDayOfTheMonth));
+            if (onTheRule != null)
             {
-                return $"every {Ordinal} months {subRules}";
+                var day = ((EveryDayOfTheMonth)onTheRule).Day.ToOrdinal(false);
+                return $"on every {Ordinal.ToOrdinal()} month on the {day}";
             }
-            return $"every month {subRules}";
-            //$"on every {(Ordinal > 1 ? Ordinal.ToString() : "")} month{(Ordinal > 1 ? "s" : "")}";
+
+            onTheRule = Rules.SingleOrDefault(r => r.GetType() == typeof(OnTheNthDayOfTheWeek));
+            if (onTheRule != null)
+            {
+                var day = ((OnTheNthDayOfTheWeek)onTheRule).DayOfWeek;
+                var innerOrdinal = ((OnTheNthDayOfTheWeek)onTheRule).Ordinal;
+
+                return $"on every {Ordinal.ToOrdinal()} month on the {innerOrdinal.ToOrdinal(false)} {day}";
+            }
+
+            throw new NotSupportedException();
         }
     }
 }

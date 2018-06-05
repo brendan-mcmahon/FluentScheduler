@@ -17,11 +17,21 @@ namespace TemporalExpressions
         public static bool IsLeapYear(this DateTime date) =>
             date.Year % 4 == 0;
 
-        public static string ToOrdinal(this int n)
+        public static string ToOrdinal(this int n, bool adjustforBrevity = true)
         {
-            if (n == 1 || n == 0) return "";
-            else if (n == 2) return "other";
-            else if (n == 3) return "3rd";
+            if (n == 0) return "";
+
+            else if (n == 1 && adjustforBrevity) return "";
+            else if (n == 11) return "11th";
+            else if ((n % 10 == 1) && !adjustforBrevity) return $"{n}st";
+
+            else if (n == 2 && adjustforBrevity) return "other";
+            else if ((n == 2 && !adjustforBrevity)) return $"{n}nd";
+            else if (n == 12) return "12th";
+            else if (n % 10 == 2) return $"{n}nd";
+
+            else if (n == 13) return "13th";
+            else if ((n % 10 == 3)) return $"{n}rd";
             else return $"{n}th";
         }
     }

@@ -19,6 +19,6 @@ namespace TemporalExpressions.Rules
             date.Day == 1 && date.Month == (int) Month.March;
 
         public override string ToString() =>
-            $"on every {Ordinal.ToOrdinal()} {Month} {Day.ToOrdinal()}{SubRulesString()}";
+            $"on every {Ordinal.ToOrdinal()} {Month} {Day.ToOrdinal(false)}{SubRulesString()}";
     }
 }

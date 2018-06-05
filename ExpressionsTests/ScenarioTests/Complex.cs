@@ -111,6 +111,12 @@ namespace ExpressionsTests.ScenarioTests
                 .And(Occur.OnEvery(2, TimeUnit.Months).OnThe(3, DayOfWeek.Thursday))
                 .And(Occur.On(new DateTime(2018, 5, 14)));
 
+            Recurrence.AddRule(Occur.OnEvery(1).StartingOn(new DateTime(2018, 1, 1)))
+                .And(Occur.OnEvery(DayOfWeek.Sunday).StartingOn(new DateTime(2018, 1, 1)))
+                .And(Occur.OnEvery(2, TimeUnit.Months).OnThe(15).StartingOn(new DateTime(2018, 1, 1)))
+                .And(Occur.OnEvery(10).StartingOn(new DateTime(2018, 1, 1)))
+                .And(Occur.OnEvery(2, DayOfWeek.Friday).StartingOn(new DateTime(2018, 1, 1)));
+
             Console.WriteLine(Recurrence);
         }
     }

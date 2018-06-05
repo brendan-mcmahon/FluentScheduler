@@ -24,6 +24,6 @@ namespace TemporalExpressions.Rules
             date.Day <= (7 * Ordinal);
 
         public override string ToString() =>
-            $"on the {((Ordinal > 1) ? Ordinal.ToOrdinal() : null)} {DayOfWeek}";
+            $"on every {Ordinal.ToOrdinal()} {DayOfWeek}";
     }
 }

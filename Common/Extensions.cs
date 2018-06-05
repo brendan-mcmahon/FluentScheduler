@@ -34,7 +34,7 @@ namespace Common
             message = Regex.Replace(message, @"\s+", " ");
             message = message.CapitalizeFirst();
 
-            return message;
+            return $"{message}.";
         }
 
         public static string CapitalizeFirst(this string s)
