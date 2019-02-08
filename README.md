@@ -22,9 +22,9 @@ Every other weekend and every Wednesday. You also get Christmas Eve, but not Chr
 Then, when you need to check whether you have custody on any given date, pass it into the Recurrences Evaluate method:
 
 ```c#
-  TomagachiCustody.Evaluate(new DateTime(2018, 4, 25)); // Returns true since it is a Wednesday
+  TomagachiCustody.Evaluate(new DateTime(2018, 4, 25)); // Returns true because it is a Wednesday
   
-  TomagachiCustody.Evaluate(new DateTime(2018, 12, 25)); // Returns false since it is Christmas
+  TomagachiCustody.Evaluate(new DateTime(2018, 12, 25)); // Returns false because it is Christmas
 ```
   
 
